@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AudioToolView" customModule="Kuso" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHk-O4-Bjh" customClass="HitExtendButton" customModule="Kuso" customModuleProvider="target">
+                    <rect key="frame" x="341" y="13" width="24" height="24"/>
+                    <state key="normal" image="ev_trash_gray"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7v0-dk-AkH" customClass="HitExtendButton" customModule="Kuso" customModuleProvider="target">
+                    <rect key="frame" x="10" y="13" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="Ylu-es-VU7"/>
+                        <constraint firstAttribute="height" constant="24" id="uK9-Z7-Kmh"/>
+                    </constraints>
+                    <state key="normal" image="choose_music_volume"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQd-eO-kJ4" customClass="AnimationSlider" customModule="Kuso" customModuleProvider="target">
+                    <rect key="frame" x="49" y="0.0" width="277" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="APS-0a-epK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="bHk-O4-Bjh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="13" id="9ji-Wg-5ql"/>
+                <constraint firstItem="7v0-dk-AkH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="13" id="HbR-rb-8R5"/>
+                <constraint firstItem="bHk-O4-Bjh" firstAttribute="leading" secondItem="PQd-eO-kJ4" secondAttribute="trailing" constant="15" id="VmE-Nc-ODc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bHk-O4-Bjh" secondAttribute="trailing" constant="10" id="hT8-Hc-C15"/>
+                <constraint firstItem="PQd-eO-kJ4" firstAttribute="leading" secondItem="7v0-dk-AkH" secondAttribute="trailing" constant="15" id="i4g-43-T0g"/>
+                <constraint firstItem="7v0-dk-AkH" firstAttribute="centerY" secondItem="PQd-eO-kJ4" secondAttribute="centerY" id="uqE-FI-S0b"/>
+                <constraint firstItem="7v0-dk-AkH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="z10-ld-Bvm"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="loudspeakerButton" destination="7v0-dk-AkH" id="FNg-20-yGn"/>
+                <outlet property="trashButton" destination="bHk-O4-Bjh" id="OOw-Eb-cDi"/>
+                <outlet property="volumeSlider" destination="PQd-eO-kJ4" id="Dq9-Y6-ck3"/>
+            </connections>
+            <point key="canvasLocation" x="160.80000000000001" y="48.575712143928037"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="choose_music_volume" width="24" height="24"/>
+        <image name="ev_trash_gray" width="24" height="24"/>
+    </resources>
+</document>
