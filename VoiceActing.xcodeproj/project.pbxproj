@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C4D7293B9B2EFA2C7AD65BE /* Pods_Dubbing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FCBA9F72341450398ABBCB /* Pods_Dubbing.framework */; };
+		4C4D7293B9B2EFA2C7AD65BE /* Pods_VoiceActing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */; };
 		84A48981223FAB1700A8D124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48980223FAB1700A8D124 /* AppDelegate.swift */; };
 		84A48983223FAB1700A8D124 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48982223FAB1700A8D124 /* ViewController.swift */; };
 		84A48986223FAB1700A8D124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A48984223FAB1700A8D124 /* Main.storyboard */; };
@@ -55,9 +55,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6CA95BA3DCF5FF3C76FD77CA /* Pods-Dubbing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dubbing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dubbing/Pods-Dubbing.debug.xcconfig"; sourceTree = "<group>"; };
-		7EB21FE22BF8A5C96D5E631C /* Pods-Dubbing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dubbing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dubbing/Pods-Dubbing.release.xcconfig"; sourceTree = "<group>"; };
-		84A4897D223FAB1700A8D124 /* Dubbing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dubbing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CA95BA3DCF5FF3C76FD77CA /* Pods-VoiceActing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.debug.xcconfig"; sourceTree = "<group>"; };
+		7EB21FE22BF8A5C96D5E631C /* Pods-VoiceActing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.release.xcconfig"; sourceTree = "<group>"; };
+		84A4897D223FAB1700A8D124 /* VoiceActing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceActing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A48980223FAB1700A8D124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A48982223FAB1700A8D124 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84A48985223FAB1700A8D124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		84A48AB82244ED9900A8D124 /* UIImage+BSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BSCategory.h"; sourceTree = "<group>"; };
 		84A48AB92244ED9900A8D124 /* UIImage+BSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BSCategory.m"; sourceTree = "<group>"; };
 		84A48ABB2244F17200A8D124 /* FileManager+NameBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+NameBox.swift"; sourceTree = "<group>"; };
-		C9FCBA9F72341450398ABBCB /* Pods_Dubbing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dubbing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceActing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4D7293B9B2EFA2C7AD65BE /* Pods_Dubbing.framework in Frameworks */,
+				4C4D7293B9B2EFA2C7AD65BE /* Pods_VoiceActing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,8 +124,8 @@
 		09AEB76F855654327D25E90E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6CA95BA3DCF5FF3C76FD77CA /* Pods-Dubbing.debug.xcconfig */,
-				7EB21FE22BF8A5C96D5E631C /* Pods-Dubbing.release.xcconfig */,
+				6CA95BA3DCF5FF3C76FD77CA /* Pods-VoiceActing.debug.xcconfig */,
+				7EB21FE22BF8A5C96D5E631C /* Pods-VoiceActing.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -133,7 +133,7 @@
 		84A48974223FAB1700A8D124 = {
 			isa = PBXGroup;
 			children = (
-				84A4897F223FAB1700A8D124 /* Dubbing */,
+				84A4897F223FAB1700A8D124 /* VoiceActing */,
 				84A4897E223FAB1700A8D124 /* Products */,
 				09AEB76F855654327D25E90E /* Pods */,
 				ADDEB6E0F1743190A75280A0 /* Frameworks */,
@@ -143,12 +143,12 @@
 		84A4897E223FAB1700A8D124 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84A4897D223FAB1700A8D124 /* Dubbing.app */,
+				84A4897D223FAB1700A8D124 /* VoiceActing.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84A4897F223FAB1700A8D124 /* Dubbing */ = {
+		84A4897F223FAB1700A8D124 /* VoiceActing */ = {
 			isa = PBXGroup;
 			children = (
 				84A48980223FAB1700A8D124 /* AppDelegate.swift */,
@@ -164,7 +164,7 @@
 				84A4898C223FAB1900A8D124 /* Info.plist */,
 				84A48A492242216500A8D124 /* Bridging-Header.h */,
 			);
-			path = Dubbing;
+			path = VoiceActing;
 			sourceTree = "<group>";
 		};
 		84A489F52241E95500A8D124 /* MediaCompose */ = {
@@ -326,7 +326,7 @@
 		ADDEB6E0F1743190A75280A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C9FCBA9F72341450398ABBCB /* Pods_Dubbing.framework */,
+				C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -334,9 +334,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84A4897C223FAB1700A8D124 /* Dubbing */ = {
+		84A4897C223FAB1700A8D124 /* VoiceActing */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84A4898F223FAB1900A8D124 /* Build configuration list for PBXNativeTarget "Dubbing" */;
+			buildConfigurationList = 84A4898F223FAB1900A8D124 /* Build configuration list for PBXNativeTarget "VoiceActing" */;
 			buildPhases = (
 				7C76D40D62C26B1E8231C582 /* [CP] Check Pods Manifest.lock */,
 				84A48979223FAB1700A8D124 /* Sources */,
@@ -349,9 +349,9 @@
 			);
 			dependencies = (
 			);
-			name = Dubbing;
-			productName = Dubbing;
-			productReference = 84A4897D223FAB1700A8D124 /* Dubbing.app */;
+			name = VoiceActing;
+			productName = VoiceActing;
+			productReference = 84A4897D223FAB1700A8D124 /* VoiceActing.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -369,7 +369,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84A48978223FAB1700A8D124 /* Build configuration list for PBXProject "Dubbing" */;
+			buildConfigurationList = 84A48978223FAB1700A8D124 /* Build configuration list for PBXProject "VoiceActing" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -382,7 +382,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84A4897C223FAB1700A8D124 /* Dubbing */,
+				84A4897C223FAB1700A8D124 /* VoiceActing */,
 			);
 		};
 /* End PBXProject section */
@@ -416,7 +416,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Dubbing-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-VoiceActing-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,7 +429,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Dubbing/Pods-Dubbing-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -442,7 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dubbing/Pods-Dubbing-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E26BADCC53D5173B9D9AFA04 /* [CP] Copy Pods Resources */ = {
@@ -457,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dubbing/Pods-Dubbing-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -647,21 +647,21 @@
 		};
 		84A48990223FAB1900A8D124 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CA95BA3DCF5FF3C76FD77CA /* Pods-Dubbing.debug.xcconfig */;
+			baseConfigurationReference = 6CA95BA3DCF5FF3C76FD77CA /* Pods-VoiceActing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K894H4XBD8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Dubbing/Info.plist;
+				INFOPLIST_FILE = VoiceActing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blurryssky.Dubbing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blurryssky.VoiceActing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Dubbing/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "VoiceActing/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -669,21 +669,21 @@
 		};
 		84A48991223FAB1900A8D124 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EB21FE22BF8A5C96D5E631C /* Pods-Dubbing.release.xcconfig */;
+			baseConfigurationReference = 7EB21FE22BF8A5C96D5E631C /* Pods-VoiceActing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K894H4XBD8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Dubbing/Info.plist;
+				INFOPLIST_FILE = VoiceActing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.blurryssky.Dubbing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blurryssky.VoiceActing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Dubbing/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "VoiceActing/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -692,7 +692,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84A48978223FAB1700A8D124 /* Build configuration list for PBXProject "Dubbing" */ = {
+		84A48978223FAB1700A8D124 /* Build configuration list for PBXProject "VoiceActing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84A4898D223FAB1900A8D124 /* Debug */,
@@ -701,7 +701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84A4898F223FAB1900A8D124 /* Build configuration list for PBXNativeTarget "Dubbing" */ = {
+		84A4898F223FAB1900A8D124 /* Build configuration list for PBXNativeTarget "VoiceActing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84A48990223FAB1900A8D124 /* Debug */,

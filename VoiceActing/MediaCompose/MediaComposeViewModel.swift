@@ -1,6 +1,6 @@
 //
 //  MediaComposeViewModel.swift
-//  Dubbing
+//  VoiceActing
 //
 //  Created by blurryssky on 2019/3/20.
 //  Copyright © 2019 blurryssky. All rights reserved.
