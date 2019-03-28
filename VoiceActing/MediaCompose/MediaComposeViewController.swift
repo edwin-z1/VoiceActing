@@ -30,6 +30,7 @@ class MediaComposeViewController: UIViewController {
     private var playControlObservation: NSKeyValueObservation?
     
     private let videoControlView = VideoControlView.bs.instantiateFromNib
+    @IBOutlet var audioSelectionView: AudioSelectionView!
     
     private let bag = DisposeBag()
     
@@ -72,6 +73,7 @@ private extension MediaComposeViewController {
         setupPlayerView()
         setupPlayer()
         setupVideoEditView()
+        setupAudioSelectionView()
     }
     
     func setupViewModel() {
@@ -216,12 +218,28 @@ private extension MediaComposeViewController {
     func setupVideoEditView() {
         
         videoControlView.viewModel = viewModel
-        view.addSubview(videoControlView)
+        view.insertSubview(videoControlView, at: 0)
         videoControlView.snp.makeConstraints { (maker) in
             maker.top.equalTo(playerView.snp.bottom)
             maker.left.equalToSuperview()
             maker.right.equalToSuperview()
             maker.bottom.equalToSuperview()
         }
+    }
+}
+
+// MARK : - 音视输入区域
+private extension MediaComposeViewController {
+    
+    func setupAudioSelectionView() {
+        
+        audioSelectionView.viewModel = viewModel
+        view.addSubview(audioSelectionView)
+        audioSelectionView.snp.makeConstraints { (maker) in
+            maker.left.equalToSuperview()
+            maker.right.equalToSuperview()
+            maker.bottom.equalToSuperview()
+        }
+        
     }
 }

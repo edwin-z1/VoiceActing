@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4C4D7293B9B2EFA2C7AD65BE /* Pods_VoiceActing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */; };
+		84117661224B7FE400F8E8D5 /* AudioRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */; };
+		84117662224B7FE400F8E8D5 /* AudioRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117660224B7FE400F8E8D5 /* AudioRecordView.swift */; };
 		84A48981223FAB1700A8D124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48980223FAB1700A8D124 /* AppDelegate.swift */; };
 		84A48983223FAB1700A8D124 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48982223FAB1700A8D124 /* ViewController.swift */; };
 		84A48986223FAB1700A8D124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A48984223FAB1700A8D124 /* Main.storyboard */; };
@@ -52,11 +54,15 @@
 		84A48AAD2242261C00A8D124 /* MediaComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48AAC2242261C00A8D124 /* MediaComposeViewModel.swift */; };
 		84A48ABA2244ED9900A8D124 /* UIImage+BSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A48AB92244ED9900A8D124 /* UIImage+BSCategory.m */; };
 		84A48ABC2244F17200A8D124 /* FileManager+NameBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48ABB2244F17200A8D124 /* FileManager+NameBox.swift */; };
+		84A48AED2248C71000A8D124 /* AudioSelectionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48ACD2248C71000A8D124 /* AudioSelectionCollectionCell.swift */; };
+		84A48AF32248C71000A8D124 /* AudioSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48AD52248C71000A8D124 /* AudioSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6CA95BA3DCF5FF3C76FD77CA /* Pods-VoiceActing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.debug.xcconfig"; sourceTree = "<group>"; };
 		7EB21FE22BF8A5C96D5E631C /* Pods-VoiceActing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.release.xcconfig"; sourceTree = "<group>"; };
+		8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioRecordView.xib; sourceTree = "<group>"; };
+		84117660224B7FE400F8E8D5 /* AudioRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecordView.swift; sourceTree = "<group>"; };
 		84A4897D223FAB1700A8D124 /* VoiceActing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceActing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A48980223FAB1700A8D124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A48982223FAB1700A8D124 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 		84A48AB82244ED9900A8D124 /* UIImage+BSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BSCategory.h"; sourceTree = "<group>"; };
 		84A48AB92244ED9900A8D124 /* UIImage+BSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BSCategory.m"; sourceTree = "<group>"; };
 		84A48ABB2244F17200A8D124 /* FileManager+NameBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+NameBox.swift"; sourceTree = "<group>"; };
+		84A48ACD2248C71000A8D124 /* AudioSelectionCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionCollectionCell.swift; sourceTree = "<group>"; };
+		84A48AD52248C71000A8D124 /* AudioSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionView.swift; sourceTree = "<group>"; };
 		C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceActing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,6 +141,7 @@
 		84A48974223FAB1700A8D124 = {
 			isa = PBXGroup;
 			children = (
+				84A48A102241F0E100A8D124 /* Extension */,
 				84A4897F223FAB1700A8D124 /* VoiceActing */,
 				84A4897E223FAB1700A8D124 /* Products */,
 				09AEB76F855654327D25E90E /* Pods */,
@@ -154,7 +163,6 @@
 				84A48980223FAB1700A8D124 /* AppDelegate.swift */,
 				84A48982223FAB1700A8D124 /* ViewController.swift */,
 				84A48A3D2242211300A8D124 /* Vendor */,
-				84A48A102241F0E100A8D124 /* Extension */,
 				84A48A042241F0E100A8D124 /* PhotosSelect */,
 				84A48A002241F0E100A8D124 /* Protocol */,
 				84A489F52241E95500A8D124 /* MediaCompose */,
@@ -170,7 +178,8 @@
 		84A489F52241E95500A8D124 /* MediaCompose */ = {
 			isa = PBXGroup;
 			children = (
-				84A48A7C224223C300A8D124 /* MediaEdit */,
+				84A48A7C224223C300A8D124 /* MediaControl */,
+				84A48AC02248C71000A8D124 /* AudioSelection */,
 				84A48A3522421F3F00A8D124 /* MediaComposeItem.swift */,
 				84A48A3822421F3F00A8D124 /* MediaComposer.swift */,
 				84A48AAC2242261C00A8D124 /* MediaComposeViewModel.swift */,
@@ -302,7 +311,7 @@
 			path = AVFoundation;
 			sourceTree = "<group>";
 		};
-		84A48A7C224223C300A8D124 /* MediaEdit */ = {
+		84A48A7C224223C300A8D124 /* MediaControl */ = {
 			isa = PBXGroup;
 			children = (
 				84A48A83224223C300A8D124 /* VideoControlView.swift */,
@@ -311,7 +320,7 @@
 				84A48A82224223C300A8D124 /* MediaEditComponentView.swift */,
 				84A48A81224223C300A8D124 /* MediaEditComponentView.xib */,
 			);
-			path = MediaEdit;
+			path = MediaControl;
 			sourceTree = "<group>";
 		};
 		84A48AB72244ED9900A8D124 /* UIImage+BSCategory */ = {
@@ -321,6 +330,17 @@
 				84A48AB92244ED9900A8D124 /* UIImage+BSCategory.m */,
 			);
 			path = "UIImage+BSCategory";
+			sourceTree = "<group>";
+		};
+		84A48AC02248C71000A8D124 /* AudioSelection */ = {
+			isa = PBXGroup;
+			children = (
+				84A48AD52248C71000A8D124 /* AudioSelectionView.swift */,
+				84A48ACD2248C71000A8D124 /* AudioSelectionCollectionCell.swift */,
+				84117660224B7FE400F8E8D5 /* AudioRecordView.swift */,
+				8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */,
+			);
+			path = AudioSelection;
 			sourceTree = "<group>";
 		};
 		ADDEB6E0F1743190A75280A0 /* Frameworks */ = {
@@ -392,6 +412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84117661224B7FE400F8E8D5 /* AudioRecordView.xib in Resources */,
 				84A489F72241E9FA00A8D124 /* MediaCompose.storyboard in Resources */,
 				84A4898B223FAB1900A8D124 /* LaunchScreen.storyboard in Resources */,
 				84A48988223FAB1900A8D124 /* Assets.xcassets in Resources */,
@@ -430,13 +451,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -473,10 +500,13 @@
 				84A48A2A2241F0E100A8D124 /* AlbumsSelectViewController.swift in Sources */,
 				84A48AAD2242261C00A8D124 /* MediaComposeViewModel.swift in Sources */,
 				84A48A322241F0E100A8D124 /* NSObject+bs.swift in Sources */,
+				84A48AF32248C71000A8D124 /* AudioSelectionView.swift in Sources */,
 				84A48A272241F0E100A8D124 /* PhotosSelectViewController.swift in Sources */,
 				84A48A3C22421F3F00A8D124 /* MediaComposer.swift in Sources */,
+				84A48AED2248C71000A8D124 /* AudioSelectionCollectionCell.swift in Sources */,
 				84A48A332241F0E100A8D124 /* String+bs.swift in Sources */,
 				84A48A4F2242231C00A8D124 /* AVAssetExportSession+NameBox.swift in Sources */,
+				84117662224B7FE400F8E8D5 /* AudioRecordView.swift in Sources */,
 				84A48983223FAB1700A8D124 /* ViewController.swift in Sources */,
 				84A48A512242231C00A8D124 /* AVAssetTrack+NameBox.swift in Sources */,
 				84A48ABA2244ED9900A8D124 /* UIImage+BSCategory.m in Sources */,

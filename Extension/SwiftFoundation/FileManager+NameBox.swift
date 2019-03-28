@@ -10,7 +10,6 @@ import Foundation
 
 private let libraryPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
 private let videosDir = URL(fileURLWithPath: libraryPath).appendingPathComponent("Videos")
-private let musicsDir = URL(fileURLWithPath: libraryPath).appendingPathComponent("Musics")
 
 extension NamespaceBox where T: FileManager {
     
@@ -27,15 +26,6 @@ extension NamespaceBox where T: FileManager {
         return videosDir.appendingPathComponent("EditedVideos")
     }
     
-    // audio dirs
-    static var downloadedMusicsDir: URL {
-        return musicsDir.appendingPathComponent("DownloadedMusics")
-    }
-    
-    static var editedMusicsDir: URL {
-        return musicsDir.appendingPathComponent("EditedMusics")
-    }
-    
     // file urls
     static var newRecordAudioUrl: URL {
         return recordedAudiosDir.appendingPathComponent(timestamp).appendingPathExtension("pcm")
@@ -43,10 +33,6 @@ extension NamespaceBox where T: FileManager {
     
     static var newEditVideoUrl: URL {
         return editedVideosDir.appendingPathComponent(timestamp).appendingPathExtension("mp4")
-    }
-    
-    static var newEditMusicUrl: URL {
-        return editedMusicsDir.appendingPathComponent(timestamp).appendingPathExtension("mp3")
     }
     
     private static var timestamp: String {
@@ -58,7 +44,7 @@ extension NamespaceBox where T: FileManager {
 extension NamespaceBox where T: FileManager {
     
     static func createDirectorys() {
-        let dirs = [recordedAudiosDir, encodedAudiosDir, editedVideosDir, downloadedMusicsDir, editedMusicsDir]
+        let dirs = [recordedAudiosDir, encodedAudiosDir, editedVideosDir]
         for dir in dirs {
             if !FileManager.default.fileExists(atPath: dir.path) {
                 do {
@@ -72,7 +58,7 @@ extension NamespaceBox where T: FileManager {
     
     static func clearFiles() {
         
-        let dirs = [recordedAudiosDir, encodedAudiosDir, editedVideosDir, downloadedMusicsDir, editedMusicsDir]
+        let dirs = [recordedAudiosDir, encodedAudiosDir, editedVideosDir]
         
         for dir in dirs {
             do {

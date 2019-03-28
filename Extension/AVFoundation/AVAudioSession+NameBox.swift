@@ -10,13 +10,13 @@ import AVFoundation
 
 extension NamespaceBox where T == AVAudioSession {
     
-    static func setAudioSession(category: AVAudioSession.Category, policy: AVAudioSession.RouteSharingPolicy = .default) {
+    static func setAudioSession(category: AVAudioSession.Category) {
         let audioSeesion = AVAudioSession.sharedInstance()
-        guard audioSeesion.category != category, audioSeesion.routeSharingPolicy != policy else {
+        guard audioSeesion.category != category else {
             return
         }
         do {
-            try audioSeesion.setCategory(category, mode: .moviePlayback, policy: policy, options: [.allowAirPlay])
+            try audioSeesion.setCategory(category)
         } catch let error {
             print("setAudioSessionCategory = \(error)")
         }

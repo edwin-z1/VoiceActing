@@ -7,8 +7,10 @@ target 'VoiceActing' do
 
   # Pods for VoiceActing
 
-  pod 'RxSwift', '~> 4.1.0'
-  pod 'RxCocoa', '~> 4.1.0'
+  #Rx
+  pod 'RxSwift', '~> 4.4.0'
+  pod 'RxCocoa', '~> 4.4.0'
+  pod 'RxDataSources', '~> 3.1.0'
 
   #自动布局框架 SnapKit
   pod 'SnapKit', '4.0.0'

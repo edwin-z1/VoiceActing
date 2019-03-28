@@ -13,13 +13,13 @@ import RxCocoa
 
 class AudioRecordView: UIView {
     
-    var recordCount = 0
-    
-    var isRecordVariable = Variable<Bool>(false)
+    var viewModel: MediaComposeViewModel! {
+        didSet {
+            update()
+        }
+    }
     
     fileprivate(set) var recorder: AVAudioRecorder?
-
-    @IBOutlet weak var micView: UIView!
 
     fileprivate let bag = DisposeBag()
     // MARK: - Record Animation
@@ -36,11 +36,6 @@ class AudioRecordView: UIView {
 private extension AudioRecordView {
     
     func setup() {
-        setupMicView()
-        setupRecordVariable()
-    }
-    
-    func setupMicView() {
         let longPressGesture = UILongPressGestureRecognizer()
         longPressGesture.minimumPressDuration = 0.2
         let isLongPressStart = longPressGesture.rx.event
@@ -49,7 +44,7 @@ private extension AudioRecordView {
                 switch longPress.state {
                 case .began:
                     // 过滤由tap开始录音中再长按
-                    if self.isRecordVariable.value {
+                    if self.viewModel.isRecordVariable.value {
                         return false
                     } else {
                         return true
@@ -73,8 +68,8 @@ private extension AudioRecordView {
         let tapGesture = UITapGestureRecognizer()
         let isTapStart = tapGesture.rx.event
             .map { [unowned self] _ in
-                !self.isRecordVariable.value
-            }
+                !self.viewModel.isRecordVariable.value
+        }
         
         let startRecord = Observable.merge([isTapStart, isLongPressStart]).share()
         
@@ -92,18 +87,37 @@ private extension AudioRecordView {
         startRecord
             .filter { !$0 }
             .subscribe(onNext: { [unowned self] (_) in
-                self.isRecordVariable.value = false
+                self.viewModel.isRecordVariable.value = false
             })
             .disposed(by: bag)
         
-        micView.addGestureRecognizer(tapGesture)
-        micView.addGestureRecognizer(longPressGesture)
+        addGestureRecognizer(tapGesture)
+        addGestureRecognizer(longPressGesture)
         
         tapGesture.require(toFail: longPressGesture)
     }
     
-    func setupRecordVariable() {
-        isRecordVariable.asObservable()
+    func createRecorder() {
+        AVAudioSession.bs.setAudioSession(category: .playAndRecord)
+        let url = FileManager.bs.newRecordAudioUrl
+        do {
+            let settings = [AVFormatIDKey: kAudioFormatLinearPCM,
+                            AVSampleRateKey: RecordAttributes.sampleRate,
+                            AVNumberOfChannelsKey: RecordAttributes.numberOfChannels] as [String : Any]
+            recorder = try AVAudioRecorder(url: url, format: AVAudioFormat(settings: settings)!)
+            recorder?.isMeteringEnabled = true
+            viewModel.isRecordVariable.value = true
+        } catch {
+            print("\((#file, #line)) catch = \(error)")
+        }
+    }
+    
+    func update() {
+        observeViewModel()
+    }
+    
+    func observeViewModel() {
+        viewModel.isRecordVariable.asObservable()
             .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] (isRecord) in
                 if isRecord {
@@ -123,35 +137,13 @@ private extension AudioRecordView {
             })
             .disposed(by: bag)
     }
-    
-    func createRecorder() {
-        
-        guard recordCount < App.systemSetting.mediaSetting.maxRecordCount else {
-            UIView.ks.showToast(title:"最多只能配置\(App.systemSetting.mediaSetting.maxRecordCount)个录音")
-            return
-        }
-        
-        let url = FileManager.ks.newRecordAudioUrl
-        do {
-            AVAudioSession.ks.setAudioSessionCategory(AVAudioSessionCategoryPlayAndRecord)
-            
-            let settings = [AVFormatIDKey: kAudioFormatLinearPCM,
-                            AVSampleRateKey: RecordAttributes.sampleRate,
-                            AVNumberOfChannelsKey: RecordAttributes.numberOfChannels] as [String : Any]
-            recorder = try AVAudioRecorder(url: url, format: AVAudioFormat(settings: settings)!)
-            recorder?.isMeteringEnabled = true
-            isRecordVariable.value = true
-        } catch {
-            print("\(#file, #line) catch = \(error)")
-        }
-    }
 }
 
 private extension AudioRecordView {
     
     func addRecordingAnimation() {
         
-        addMicViewScaleAnimation(isEndingAnimation: false)
+        addRecordViewScaleAnimation(isEnding: false)
         let count = 5
         Observable<Int>.interval(animationDuration/Double(count), scheduler: MainScheduler.instance)
             .take(count)
@@ -160,46 +152,46 @@ private extension AudioRecordView {
                 
                 var animationView: UIView!
                 if self.animationViews.count < count {
-                    animationView = UIView(frame: self.micView.frame)
+                    animationView = UIView(frame: self.bounds)
                     animationView.isUserInteractionEnabled = false
                     animationView.layer.opacity = 0
                     self.addSubview(animationView)
                     self.animationViews.append(animationView)
                     
-                    let fromPath = UIBezierPath(roundedRect: animationView.bounds, cornerRadius: animationView.ks.width/2)
+                    let fromPath = UIBezierPath(roundedRect: animationView.bounds, cornerRadius: animationView.bs.width/2)
                     
                     let shapeLayer = CAShapeLayer()
                     shapeLayer.path = fromPath.cgPath
                     shapeLayer.lineDashPattern = [NSNumber(value: 2)]
-                    shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.3)
+                    shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.4)
                     shapeLayer.fillColor = UIColor.clear.cgColor
                     animationView.layer.addSublayer(shapeLayer)
                     
                 } else {
                     animationView = self.animationViews[idx]
                 }
-                self.addDashLineLayerAnimation(on: animationView, isEndingAnimation: false)
+                self.addDashLineLayerAnimation(on: animationView, isEnding: false)
             })
             .disposed(by: animationBag)
     }
     
     func removeRecordingAnimation() {
         animationBag = DisposeBag()
-        addMicViewScaleAnimation(isEndingAnimation: true)
+        addRecordViewScaleAnimation(isEnding: true)
         animationViews.forEach { (animationView) in
-            addDashLineLayerAnimation(on: animationView, isEndingAnimation: true)
+            addDashLineLayerAnimation(on: animationView, isEnding: true)
         }
     }
     
-    func addMicViewScaleAnimation(isEndingAnimation: Bool) {
+    func addRecordViewScaleAnimation(isEnding: Bool) {
         
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
         scaleAnimation.isRemovedOnCompletion = false
-        scaleAnimation.fillMode = kCAFillModeForwards
-        scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scaleAnimation.fillMode = .forwards
+        scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         
-        if isEndingAnimation {
-            let fromScale = micView.layer.presentation()?.transform.m11 ?? 1
+        if isEnding {
+            let fromScale = layer.presentation()?.transform.m11 ?? 1
             scaleAnimation.fromValue = fromScale
             scaleAnimation.toValue = 1
             scaleAnimation.repeatCount = 1
@@ -212,28 +204,28 @@ private extension AudioRecordView {
             scaleAnimation.duration = animationDuration/5/2
         }
         
-        micView.layer.add(scaleAnimation, forKey: "scale")
+        layer.add(scaleAnimation, forKey: "scale")
     }
     
-    func addDashLineLayerAnimation(on view: UIView, isEndingAnimation: Bool) {
+    func addDashLineLayerAnimation(on view: UIView, isEnding: Bool) {
         
         let fromScale = view.layer.presentation()?.transform.m11 ?? 1
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnimation.fromValue = isEndingAnimation ? fromScale : 1
+        scaleAnimation.fromValue = isEnding ? fromScale : 1
         scaleAnimation.toValue = 2
         
         let fromOpacity = view.layer.presentation()?.opacity ?? 1
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
-        opacityAnimation.fromValue = isEndingAnimation ? fromOpacity : 1
+        opacityAnimation.fromValue = isEnding ? fromOpacity : 1
         opacityAnimation.toValue = 0
         
-        let duration = isEndingAnimation ? Double(fromOpacity) * animationDuration * 0.5 : animationDuration
+        let duration = isEnding ? Double(fromOpacity) * animationDuration * 0.5 : animationDuration
         let animationGroup = CAAnimationGroup()
         animationGroup.animations = [scaleAnimation, opacityAnimation]
-        animationGroup.repeatCount = isEndingAnimation ? 1 : .greatestFiniteMagnitude
+        animationGroup.repeatCount = isEnding ? 1 : .greatestFiniteMagnitude
         animationGroup.duration = duration
         animationGroup.isRemovedOnCompletion = false
-        animationGroup.fillMode = kCAFillModeForwards
+        animationGroup.fillMode = .forwards
         
         view.layer.add(animationGroup, forKey: "group")
     }

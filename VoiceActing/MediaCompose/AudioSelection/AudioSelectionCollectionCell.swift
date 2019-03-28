@@ -1,5 +1,5 @@
 //
-//  AudioSelectionCollectionCell.swift
+//  AudioSelectionTabCollectionCell.swift
 //  Kuso
 //
 //  Created by blurryssky on 2018/10/31.
@@ -9,6 +9,12 @@
 import UIKit
 
 class AudioSelectionCollectionCell: UICollectionViewCell {
+    
+    var type: AudioSelectionType! {
+        didSet {
+            label.text = type.rawValue
+        }
+    }
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var dotView: UIView!
