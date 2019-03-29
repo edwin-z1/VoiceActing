@@ -205,8 +205,8 @@ private extension MediaComposeViewController {
                     self.addPeriodicTimeObserver()
                 case .paused:
                     self.removePeriodicTimeObserver()
-                case .waitingToPlayAtSpecifiedRate:
-                    return
+                default:
+                    break
                 }
             })
         }

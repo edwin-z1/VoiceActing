@@ -59,9 +59,7 @@ class AuthorizationManager {
                 switch status {
                 case .authorized:
                     observer.onNext(true)
-                case .denied: fallthrough
-                case .notDetermined: fallthrough
-                case .restricted:
+                default:
                     observer.onNext(false)
                 }
             })
@@ -82,9 +80,7 @@ class AuthorizationManager {
                 switch status {
                 case .authorized:
                     observer.onNext(true)
-                case .denied: fallthrough
-                case .notDetermined: fallthrough
-                case .restricted:
+                default:
                     observer.onNext(false)
                 }
             }
@@ -108,8 +104,7 @@ class AuthorizationManager {
                 AVCaptureDevice.requestAccess(for: type) { isGranted in
                     observer.onNext(isGranted)
                 }
-            case .denied: fallthrough
-            case .restricted:
+            default:
                 observer.onNext(false)
             }
             return Disposables.create()

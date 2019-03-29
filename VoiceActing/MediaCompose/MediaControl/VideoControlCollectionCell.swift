@@ -48,8 +48,6 @@ private extension VideoControlCollectionCell {
             [weak self] (requestTime, cgImage, acturalTime, result, error) in
             guard let `self` = self else { return }
             switch result {
-            case .cancelled:
-                print("cancelled")
             case .failed:
                 guard let error = error else {
                     return
@@ -66,6 +64,8 @@ private extension VideoControlCollectionCell {
                         self.imgView.alpha = 1
                     })
                 }
+            default:
+                break
             }
         }
     }

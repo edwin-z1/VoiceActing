@@ -317,7 +317,7 @@ extension MediaComposeViewModel {
     
     func removeAudioItem(_ item: MediaComposeItem) {
         updateItemSelected(item, isSelected: false)
-        if let idx = audioItemsVariable.value.index(of: item) {
+        if let idx = audioItemsVariable.value.firstIndex(of: item) {
             audioItemsVariable.value.remove(at: idx)
         }
         deleteItemSubject.onNext(item)
