@@ -11,22 +11,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum PitchType: Int {
-    case original = 0
-    case monster
-    case papi
-    case transformer
-    case robot
-    case mute
-}
-
 class MediaComposeItem: NSObject {
     
     // MARK: - 音块一共有4种，原视频、录音、音乐、音效
     enum MediaType: String {
         case video
         case record
-        case music
         case soundEffect
     }
     
@@ -49,19 +39,11 @@ class MediaComposeItem: NSObject {
     var videoAsset: AVAsset?
     var videoComposition: AVMutableVideoComposition?
     
-    /// 用于 type == .record
-    var pitchType: PitchType = .original
-    
-    /// 用于 type == .music, 已经被裁剪过
-    var musicAsset: AVAsset?
-    
     /// 用于 type == .soundEffect
     let soundEffectIconUrlVariable = Variable<URL?>(nil)
     
     // MARK: - 处理UI逻辑
-    let isFoldVariable = Variable<Bool>(false)
     let isSelectedVariable = Variable<Bool>(false)
-    let deleteSubject = PublishSubject<Void>()
 
     /// 控制是否需要合成
     var isNeedCompose: Bool = true

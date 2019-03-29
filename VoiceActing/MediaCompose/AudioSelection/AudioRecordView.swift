@@ -80,14 +80,14 @@ private extension AudioRecordView {
             }
             .filter { $0 }
             .subscribe(onNext: { [unowned self] (isGranted) in
-                self.createRecorder()
+                self.startRecord()
             })
             .disposed(by: bag)
         
         startRecord
             .filter { !$0 }
             .subscribe(onNext: { [unowned self] (_) in
-                self.viewModel.isRecordVariable.value = false
+                self.endRecord()
             })
             .disposed(by: bag)
         
@@ -97,19 +97,25 @@ private extension AudioRecordView {
         tapGesture.require(toFail: longPressGesture)
     }
     
-    func createRecorder() {
+    func startRecord() {
         AVAudioSession.bs.setAudioSession(category: .playAndRecord)
         let url = FileManager.bs.newRecordAudioUrl
-        do {
-            let settings = [AVFormatIDKey: kAudioFormatLinearPCM,
-                            AVSampleRateKey: RecordAttributes.sampleRate,
-                            AVNumberOfChannelsKey: RecordAttributes.numberOfChannels] as [String : Any]
-            recorder = try AVAudioRecorder(url: url, format: AVAudioFormat(settings: settings)!)
-            recorder?.isMeteringEnabled = true
-            viewModel.isRecordVariable.value = true
-        } catch {
-            print("\((#file, #line)) catch = \(error)")
+        let settings = [AVFormatIDKey: kAudioFormatLinearPCM,
+                        AVSampleRateKey: RecordAttributes.sampleRate,
+                        AVNumberOfChannelsKey: RecordAttributes.numberOfChannels] as [String : Any]
+        guard let recorder = try? AVAudioRecorder(url: url, format: AVAudioFormat(settings: settings)!),
+            recorder.prepareToRecord(),
+            recorder.record() else {
+                return
         }
+        self.recorder = recorder
+        viewModel.isRecordVariable.value = true
+    }
+    
+    func endRecord() {
+        guard let recorder = self.recorder else { return }
+        recorder.stop()
+        viewModel.isRecordVariable.value = false
     }
     
     func update() {
@@ -118,21 +124,15 @@ private extension AudioRecordView {
     
     func observeViewModel() {
         viewModel.isRecordVariable.asObservable()
-            .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] (isRecord) in
                 if isRecord {
-                    
-                    guard let recorder = self.recorder,
-                        recorder.prepareToRecord(),
-                        recorder.record() else {
-                            return
-                    }
                     self.addRecordingAnimation()
+                    self.viewModel.addRecordItem()
                 } else {
                     
                     guard let recorder = self.recorder else { return }
-                    recorder.stop()
                     self.removeRecordingAnimation()
+                    self.viewModel.finishAddRecordItem(fileUrl: recorder.url)
                 }
             })
             .disposed(by: bag)

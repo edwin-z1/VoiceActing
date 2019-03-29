@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AudioBrickView" customModule="Kuso" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AudioEditView" customModule="VoiceActing" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="100" height="125"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -49,17 +49,9 @@
                         <constraint firstAttribute="height" constant="16" id="Uks-lq-xGc"/>
                     </constraints>
                 </imageView>
-                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ME-GY-hIk">
-                    <rect key="frame" x="0.0" y="0.0" width="100" height="85"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="85" id="XSr-jT-AuE"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="4ME-GY-hIk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1GX-M1-mh7"/>
                 <constraint firstItem="agd-b9-Cky" firstAttribute="leading" secondItem="i39-ST-HGO" secondAttribute="trailing" id="5BZ-Uq-6Pc"/>
                 <constraint firstItem="PSE-Nv-zl9" firstAttribute="top" secondItem="Ajo-fH-y6G" secondAttribute="top" constant="12" id="7ng-er-QEI"/>
                 <constraint firstItem="Ajo-fH-y6G" firstAttribute="centerX" secondItem="i39-ST-HGO" secondAttribute="centerX" id="Css-q1-rWb"/>
@@ -68,10 +60,8 @@
                 <constraint firstItem="i39-ST-HGO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="25" id="M5h-Ay-iW0"/>
                 <constraint firstItem="APh-AK-pnc" firstAttribute="bottom" secondItem="Ajo-fH-y6G" secondAttribute="bottom" id="PKx-1m-9LN"/>
                 <constraint firstItem="PSE-Nv-zl9" firstAttribute="centerX" secondItem="Ajo-fH-y6G" secondAttribute="centerX" id="UJv-42-hCd"/>
-                <constraint firstAttribute="trailing" secondItem="4ME-GY-hIk" secondAttribute="trailing" id="a0V-gO-Kio"/>
                 <constraint firstItem="Ajo-fH-y6G" firstAttribute="top" secondItem="i39-ST-HGO" secondAttribute="bottom" constant="-1" id="aaL-L9-ja6"/>
                 <constraint firstItem="APh-AK-pnc" firstAttribute="trailing" secondItem="Ajo-fH-y6G" secondAttribute="trailing" id="euT-AQ-2yU"/>
-                <constraint firstItem="4ME-GY-hIk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hc4-Xl-pvV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Ajo-fH-y6G" secondAttribute="bottom" constant="2" id="oVQ-zJ-O30"/>
                 <constraint firstItem="i39-ST-HGO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="pJA-jq-hSz"/>
                 <constraint firstItem="i39-ST-HGO" firstAttribute="bottom" secondItem="agd-b9-Cky" secondAttribute="bottom" constant="5" id="wq9-Ta-NMF"/>
@@ -84,7 +74,6 @@
                 <outlet property="constraintDarkColorViewHeight" destination="yzf-K1-CzG" id="B9A-tE-5DH"/>
                 <outlet property="constraintLightColorViewHeight" destination="07s-Oj-aXy" id="XRy-3c-tVl"/>
                 <outlet property="darkColorView" destination="i39-ST-HGO" id="Pyb-zG-CcW"/>
-                <outlet property="editBgView" destination="4ME-GY-hIk" id="7e2-eB-63n"/>
                 <outlet property="iconImgView" destination="PSE-Nv-zl9" id="K8N-kf-j3d"/>
                 <outlet property="lightColorView" destination="agd-b9-Cky" id="1YU-fd-EoJ"/>
                 <outlet property="waterFrameImgView" destination="APh-AK-pnc" id="5Ja-zz-W8f"/>

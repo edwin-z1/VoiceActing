@@ -32,6 +32,12 @@ class MediaComposeViewController: UIViewController {
     private let videoControlView = VideoControlView.bs.instantiateFromNib
     @IBOutlet var audioSelectionView: AudioSelectionView!
     
+    private lazy var audioToolView: AudioToolView = {
+        let audioToolView = AudioToolView.bs.instantiateFromNib
+        audioToolView.isHidden = true
+        return audioToolView
+    }()
+    
     private let bag = DisposeBag()
     
     deinit {
@@ -72,7 +78,7 @@ private extension MediaComposeViewController {
         setupCloseBarButtonItem()
         setupPlayerView()
         setupPlayer()
-        setupVideoEditView()
+        setupVideoControlView()
         setupAudioSelectionView()
     }
     
@@ -143,9 +149,25 @@ private extension MediaComposeViewController {
             })
             .disposed(by: bag)
         
+        viewModel.isRecordVariable.asObservable()
+            .subscribe(onNext: { [unowned self] (isRecord) in
+                if isRecord {
+                    self.videoControlView.isUserInteractionEnabled = false
+                    self.player?.isMuted = true
+                    self.player?.play()
+                } else {
+                    self.player?.pause()
+                    self.player?.isMuted = false
+                    self.videoControlView.isUserInteractionEnabled = true
+                }
+            })
+            .disposed(by: bag)
+        
+        addPlayerObservation()
+        
         Observable.merge([viewModel.previewProgressVariable.asObservable(), viewModel.playProgressVariable.asObservable()])
             .filter { [unowned self] _ in
-                !self.viewModel.isPlayVariable.value
+                !self.viewModel.isPlayVariable.value && !self.viewModel.isRecordVariable.value
             }
             .subscribe(onNext: { [unowned self] (progress) in
                 let timeSeconds = self.viewModel.videoDuration * progress
@@ -169,7 +191,7 @@ private extension MediaComposeViewController {
             })
             .disposed(by: bag)
         
-        addPlayerObservation()
+        
     }
     
     func addPlayerObservation() {
@@ -215,7 +237,7 @@ private extension MediaComposeViewController {
 // MARK : - 音视频编辑区域
 private extension MediaComposeViewController {
     
-    func setupVideoEditView() {
+    func setupVideoControlView() {
         
         videoControlView.viewModel = viewModel
         view.insertSubview(videoControlView, at: 0)
@@ -224,6 +246,45 @@ private extension MediaComposeViewController {
             maker.left.equalToSuperview()
             maker.right.equalToSuperview()
             maker.bottom.equalToSuperview()
+        }
+        
+        viewModel.selectedItemVariable.asObservable()
+            .subscribe(onNext: { [unowned self] (isSelectedItem) in
+                if let _ = isSelectedItem {
+                    self.animateAudioToolView(isShow: true)
+                } else {
+                    self.animateAudioToolView(isShow: false)
+                }
+            })
+            .disposed(by: bag)
+    }
+    
+    func animateAudioToolView(isShow: Bool) {
+
+        if isShow {
+
+            audioToolView.audioItem = viewModel.selectedItemVariable.value!
+
+            guard audioToolView.isHidden else {
+                return
+            }
+            audioToolView.transform = CGAffineTransform(translationX: 0, y: audioToolView.bs.height)
+            audioToolView.isHidden = false
+            UIView.bs.animate(content: {
+                self.audioToolView.transform = .identity
+                self.audioSelectionView.alpha = 0
+            })
+
+        } else {
+            guard !audioToolView.isHidden else {
+                return
+            }
+            UIView.bs.animate(content: {
+                self.audioToolView.transform = CGAffineTransform(translationX: 0, y: self.audioToolView.bs.height)
+                self.audioSelectionView.alpha = 1
+            }) { (_) in
+                self.audioToolView.isHidden = true
+            }
         }
     }
 }
@@ -241,5 +302,13 @@ private extension MediaComposeViewController {
             maker.bottom.equalToSuperview()
         }
         
+        audioToolView.viewModel = viewModel
+        view.addSubview(audioToolView)
+        audioToolView.snp.makeConstraints { (maker) in
+            maker.left.equalToSuperview()
+            maker.right.equalToSuperview()
+            maker.bottom.equalToSuperview()
+            maker.height.equalTo(80)
+        }
     }
 }

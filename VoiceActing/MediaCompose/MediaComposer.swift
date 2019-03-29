@@ -74,17 +74,6 @@ struct MediaComposer {
                 guard let fileUrl = getAACFileUrl(recordBrick: audioBrick) else { continue }
                 mediaAsset = AVAsset(url: fileUrl)
                 
-            case .music:
-
-                // 因为音乐可以先编辑，优先取编辑之后的资源文件，再去原音乐资源文件
-                if let asset = audioBrick.musicAsset {
-                    mediaAsset = asset
-                } else if let fileUrl = audioBrick.fileUrl {
-                    mediaAsset = AVAsset(url: fileUrl)
-                } else {
-                    continue
-                }
-                
             case .soundEffect:
                 
                 // 获取本地音效资源文件

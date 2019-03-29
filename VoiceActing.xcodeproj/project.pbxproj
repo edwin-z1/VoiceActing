@@ -10,6 +10,11 @@
 		4C4D7293B9B2EFA2C7AD65BE /* Pods_VoiceActing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */; };
 		84117661224B7FE400F8E8D5 /* AudioRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */; };
 		84117662224B7FE400F8E8D5 /* AudioRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117660224B7FE400F8E8D5 /* AudioRecordView.swift */; };
+		8415465C224DC3EA00A89A4F /* AudioToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415465A224DC3EA00A89A4F /* AudioToolView.swift */; };
+		8415465D224DC3EA00A89A4F /* AudioToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8415465B224DC3EA00A89A4F /* AudioToolView.xib */; };
+		84154661224DC8DC00A89A4F /* HitExtendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415465E224DC8DC00A89A4F /* HitExtendButton.swift */; };
+		84154662224DC8DC00A89A4F /* AnimationSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84154660224DC8DC00A89A4F /* AnimationSlider.swift */; };
+		84154664224DC94B00A89A4F /* UIResponder+NameBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84154663224DC94B00A89A4F /* UIResponder+NameBox.swift */; };
 		84A48981223FAB1700A8D124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48980223FAB1700A8D124 /* AppDelegate.swift */; };
 		84A48983223FAB1700A8D124 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48982223FAB1700A8D124 /* ViewController.swift */; };
 		84A48986223FAB1700A8D124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A48984223FAB1700A8D124 /* Main.storyboard */; };
@@ -56,6 +61,8 @@
 		84A48ABC2244F17200A8D124 /* FileManager+NameBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48ABB2244F17200A8D124 /* FileManager+NameBox.swift */; };
 		84A48AED2248C71000A8D124 /* AudioSelectionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48ACD2248C71000A8D124 /* AudioSelectionCollectionCell.swift */; };
 		84A48AF32248C71000A8D124 /* AudioSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48AD52248C71000A8D124 /* AudioSelectionView.swift */; };
+		84EA1570224CA156008F523F /* AudioEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EA156E224CA156008F523F /* AudioEditView.xib */; };
+		84EA1571224CA156008F523F /* AudioEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA156F224CA156008F523F /* AudioEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +70,11 @@
 		7EB21FE22BF8A5C96D5E631C /* Pods-VoiceActing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.release.xcconfig"; sourceTree = "<group>"; };
 		8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioRecordView.xib; sourceTree = "<group>"; };
 		84117660224B7FE400F8E8D5 /* AudioRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecordView.swift; sourceTree = "<group>"; };
+		8415465A224DC3EA00A89A4F /* AudioToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioToolView.swift; sourceTree = "<group>"; };
+		8415465B224DC3EA00A89A4F /* AudioToolView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioToolView.xib; sourceTree = "<group>"; };
+		8415465E224DC8DC00A89A4F /* HitExtendButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitExtendButton.swift; sourceTree = "<group>"; };
+		84154660224DC8DC00A89A4F /* AnimationSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationSlider.swift; sourceTree = "<group>"; };
+		84154663224DC94B00A89A4F /* UIResponder+NameBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+NameBox.swift"; sourceTree = "<group>"; };
 		84A4897D223FAB1700A8D124 /* VoiceActing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceActing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A48980223FAB1700A8D124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A48982223FAB1700A8D124 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +126,8 @@
 		84A48ABB2244F17200A8D124 /* FileManager+NameBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+NameBox.swift"; sourceTree = "<group>"; };
 		84A48ACD2248C71000A8D124 /* AudioSelectionCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionCollectionCell.swift; sourceTree = "<group>"; };
 		84A48AD52248C71000A8D124 /* AudioSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSelectionView.swift; sourceTree = "<group>"; };
+		84EA156E224CA156008F523F /* AudioEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioEditView.xib; sourceTree = "<group>"; };
+		84EA156F224CA156008F523F /* AudioEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEditView.swift; sourceTree = "<group>"; };
 		C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceActing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -138,10 +152,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8415465F224DC8DC00A89A4F /* AnimationSlider */ = {
+			isa = PBXGroup;
+			children = (
+				84154660224DC8DC00A89A4F /* AnimationSlider.swift */,
+			);
+			path = AnimationSlider;
+			sourceTree = "<group>";
+		};
 		84A48974223FAB1700A8D124 = {
 			isa = PBXGroup;
 			children = (
-				84A48A102241F0E100A8D124 /* Extension */,
 				84A4897F223FAB1700A8D124 /* VoiceActing */,
 				84A4897E223FAB1700A8D124 /* Products */,
 				09AEB76F855654327D25E90E /* Pods */,
@@ -162,6 +183,7 @@
 			children = (
 				84A48980223FAB1700A8D124 /* AppDelegate.swift */,
 				84A48982223FAB1700A8D124 /* ViewController.swift */,
+				84A48A102241F0E100A8D124 /* Extension */,
 				84A48A3D2242211300A8D124 /* Vendor */,
 				84A48A042241F0E100A8D124 /* PhotosSelect */,
 				84A48A002241F0E100A8D124 /* Protocol */,
@@ -178,6 +200,8 @@
 		84A489F52241E95500A8D124 /* MediaCompose */ = {
 			isa = PBXGroup;
 			children = (
+				8415465A224DC3EA00A89A4F /* AudioToolView.swift */,
+				8415465B224DC3EA00A89A4F /* AudioToolView.xib */,
 				84A48A7C224223C300A8D124 /* MediaControl */,
 				84A48AC02248C71000A8D124 /* AudioSelection */,
 				84A48A3522421F3F00A8D124 /* MediaComposeItem.swift */,
@@ -255,6 +279,7 @@
 		84A48A142241F0E100A8D124 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				84154663224DC94B00A89A4F /* UIResponder+NameBox.swift */,
 				84A48A152241F0E100A8D124 /* UIColor+bs.swift */,
 				84A48A162241F0E100A8D124 /* UICollectionViewFlowLayout+NameBox.swift */,
 				84A48A172241F0E100A8D124 /* UIViewController+bs.swift */,
@@ -285,6 +310,8 @@
 		84A48A3D2242211300A8D124 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				8415465F224DC8DC00A89A4F /* AnimationSlider */,
+				8415465E224DC8DC00A89A4F /* HitExtendButton.swift */,
 				84A48AB72244ED9900A8D124 /* UIImage+BSCategory */,
 				84A48A3E2242212900A8D124 /* PCM->AAC */,
 			);
@@ -317,6 +344,8 @@
 				84A48A83224223C300A8D124 /* VideoControlView.swift */,
 				84A48A7E224223C300A8D124 /* VideoControlCollectionCell.swift */,
 				84A48A80224223C300A8D124 /* VideoControlView.xib */,
+				84EA156F224CA156008F523F /* AudioEditView.swift */,
+				84EA156E224CA156008F523F /* AudioEditView.xib */,
 				84A48A82224223C300A8D124 /* MediaEditComponentView.swift */,
 				84A48A81224223C300A8D124 /* MediaEditComponentView.xib */,
 			);
@@ -414,6 +443,8 @@
 			files = (
 				84117661224B7FE400F8E8D5 /* AudioRecordView.xib in Resources */,
 				84A489F72241E9FA00A8D124 /* MediaCompose.storyboard in Resources */,
+				84EA1570224CA156008F523F /* AudioEditView.xib in Resources */,
+				8415465D224DC3EA00A89A4F /* AudioToolView.xib in Resources */,
 				84A4898B223FAB1900A8D124 /* LaunchScreen.storyboard in Resources */,
 				84A48988223FAB1900A8D124 /* Assets.xcassets in Resources */,
 				84A48986223FAB1700A8D124 /* Main.storyboard in Resources */,
@@ -451,19 +482,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -513,25 +540,30 @@
 				84A48A342241F0E100A8D124 /* TimeInterval+bs.swift in Sources */,
 				84A48A1F2241F0E100A8D124 /* Adaptable.swift in Sources */,
 				84A48A262241F0E100A8D124 /* PhotosSelectCollectionCell.swift in Sources */,
+				8415465C224DC3EA00A89A4F /* AudioToolView.swift in Sources */,
 				84A48A232241F0E100A8D124 /* AlbumsSelectTableCell.swift in Sources */,
 				84A48A282241F0E100A8D124 /* AuthorizationManager.swift in Sources */,
 				84A48981223FAB1700A8D124 /* AppDelegate.swift in Sources */,
 				84A48A2D2241F0E100A8D124 /* UIColor+bs.swift in Sources */,
 				84A48A2F2241F0E100A8D124 /* UIViewController+bs.swift in Sources */,
+				84154664224DC94B00A89A4F /* UIResponder+NameBox.swift in Sources */,
 				84A48A2C2241F0E100A8D124 /* CGPoint+bs.swift in Sources */,
 				84A48AA6224223C300A8D124 /* VideoControlCollectionCell.swift in Sources */,
 				84A48ABC2244F17200A8D124 /* FileManager+NameBox.swift in Sources */,
 				84A48A202241F0E100A8D124 /* Namespace.swift in Sources */,
 				84A48A252241F0E100A8D124 /* PhotosImageRequester.swift in Sources */,
 				84A48AAA224223C300A8D124 /* MediaEditComponentView.swift in Sources */,
+				84154662224DC8DC00A89A4F /* AnimationSlider.swift in Sources */,
 				84A48A302241F0E100A8D124 /* UIView+bs.swift in Sources */,
 				84A48A3B22421F3F00A8D124 /* RecordAudioProcesser.swift in Sources */,
 				84A48A2B2241F0E100A8D124 /* CGFloat+bs.swift in Sources */,
 				84A48A522242231C00A8D124 /* AVAudioSession+NameBox.swift in Sources */,
 				84A48A3922421F3F00A8D124 /* MediaComposeItem.swift in Sources */,
 				84A48A442242212900A8D124 /* AACEncoder.m in Sources */,
+				84EA1571224CA156008F523F /* AudioEditView.swift in Sources */,
 				84A48A312241F0E100A8D124 /* UIImage+bs.swift in Sources */,
 				84A48A242241F0E100A8D124 /* PhotosManager.swift in Sources */,
+				84154661224DC8DC00A89A4F /* HitExtendButton.swift in Sources */,
 				84A48A2E2241F0E100A8D124 /* UICollectionViewFlowLayout+NameBox.swift in Sources */,
 				84A48A222241F0E100A8D124 /* PhotosSelectItem.swift in Sources */,
 			);
@@ -684,7 +716,7 @@
 				DEVELOPMENT_TEAM = K894H4XBD8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = VoiceActing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -706,7 +738,7 @@
 				DEVELOPMENT_TEAM = K894H4XBD8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = VoiceActing/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

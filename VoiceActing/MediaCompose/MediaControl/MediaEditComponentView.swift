@@ -15,6 +15,7 @@ class MediaEditComponentView: UIView {
     
     static let handleWidth: CGFloat = 15
     
+    var viewModel: MediaComposeViewModel!
     var mediaItem: MediaComposeItem! {
         didSet {
             update()
@@ -23,8 +24,9 @@ class MediaEditComponentView: UIView {
     
     let leftPan = UIPanGestureRecognizer()
     let rightPan = UIPanGestureRecognizer()
-    let centerPan = UIPanGestureRecognizer()
     let bag = DisposeBag()
+    
+    private var panBeganTime: TimeInterval = 0
     
     @IBOutlet weak var leftTimeLabel: UILabel!
     @IBOutlet weak var leftImgView: UIImageView!
@@ -45,7 +47,40 @@ private extension MediaEditComponentView {
         
         leftImgView.addGestureRecognizer(leftPan)
         rightImgView.addGestureRecognizer(rightPan)
-        addGestureRecognizer(centerPan)
+        
+        leftPan.rx.event
+            .subscribe(onNext: { [unowned self] (pan) in
+                
+                switch pan.state {
+                case .began:
+                    self.panBeganTime = self.mediaItem.editedStartTimeVarible.value
+                case .changed:
+                    let timeInterval = self.viewModel.timeIntervalForPan(pan) + self.panBeganTime
+                    self.viewModel.updateItemEditedStartTime(self.mediaItem, timeInterval: timeInterval)
+                case .cancelled:fallthrough
+                case .ended:
+                    break
+                default: break
+                }
+            })
+            .disposed(by: bag)
+        
+        rightPan.rx.event
+            .subscribe(onNext: { [unowned self] (pan) in
+
+                switch pan.state {
+                case .began:
+                    self.panBeganTime = self.mediaItem.editedEndTimeVarible.value
+                case .changed:
+                    let timeInterval = self.viewModel.timeIntervalForPan(pan) + self.panBeganTime
+                    self.viewModel.updateItemEditedEndTime(self.mediaItem, timeInterval: timeInterval)
+                case .cancelled:fallthrough
+                case .ended:
+                    break
+                default: break
+                }
+            })
+            .disposed(by: bag)
     }
     
     func update() {

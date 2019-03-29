@@ -84,14 +84,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TM-fM-G1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6e3-Og-7br" customClass="AudioSelectionView" customModule="VoiceActing" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAd-ew-3cB">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="95" id="XL4-hZ-Wvi"/>
+                            </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-9D-RTn">
-                            <rect key="frame" x="0.0" y="205" width="375" height="70"/>
+                            <rect key="frame" x="0.0" y="95" width="375" height="70"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="wH8-jz-RHP"/>
@@ -153,7 +156,6 @@
                         <constraint firstItem="sAd-ew-3cB" firstAttribute="leading" secondItem="Kcx-VX-xwt" secondAttribute="leading" id="JhH-tA-jr0"/>
                         <constraint firstAttribute="bottom" secondItem="s8o-9D-RTn" secondAttribute="bottom" id="RS1-O9-Qi4"/>
                         <constraint firstItem="Kcx-VX-xwt" firstAttribute="trailing" secondItem="sAd-ew-3cB" secondAttribute="trailing" id="V8I-0l-Yot"/>
-                        <constraint firstAttribute="height" constant="275" id="och-ez-lMn"/>
                         <constraint firstItem="s8o-9D-RTn" firstAttribute="leading" secondItem="6e3-Og-7br" secondAttribute="leading" id="qhX-Vd-nbt"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="Kcx-VX-xwt"/>

@@ -30,13 +30,17 @@ class MediaComposeViewModel: NSObject {
     
     private(set) var videoDuration: TimeInterval!
     private(set) var videoItem: MediaComposeItem!
-    private(set) var audioItems: [MediaComposeItem] = []
-    private(set) var selectedItem: MediaComposeItem?
+    let audioItemsVariable: Variable<[MediaComposeItem]> = Variable([])
+    let selectedItemVariable: Variable<MediaComposeItem?> = Variable(nil)
+    let deleteItemSubject: PublishSubject<MediaComposeItem> = PublishSubject()
+    
+    private var recordingItem: MediaComposeItem?
     
     private let bag = DisposeBag()
     
     private var copyVideoItem: MediaComposeItem!
     private var copyAudioItems: [MediaComposeItem] = []
+    private var copyAudioItem: MediaComposeItem!
 }
 
 private extension MediaComposeViewModel {
@@ -105,7 +109,6 @@ private extension MediaComposeViewModel {
             })
             .disposed(by: bag)
     }
-    
 }
 
 // MARK : - 播放器区域
@@ -149,9 +152,8 @@ extension MediaComposeViewModel {
     
     func updatePlayProgressByPlayerWithTime(_ time: TimeInterval) {
         // 是录音 且未完成录制
-        if selectedItem?.type == .record,
-            selectedItem?.fileUrl == nil {
-            selectedItem?.editedEndTimeVarible.value = time
+        if let recordItem = recordingItem {
+            recordItem.editedEndTimeVarible.value = time
         }
         
         let progress = time/videoDuration
@@ -168,26 +170,41 @@ extension MediaComposeViewModel {
 // MARK : - 音视频编辑区域
 extension MediaComposeViewModel {
     
-    func updateItemSelected(_ item: MediaComposeItem, selected: Bool) {
-        item.isSelectedVariable.value = selected
+    func updateItemSelected(_ item: MediaComposeItem, isSelected: Bool) {
+        item.isSelectedVariable.value = isSelected
+        if isSelected {
+            if let lastSelectedItem = selectedItemVariable.value,
+                lastSelectedItem != item {
+                lastSelectedItem.isSelectedVariable.value = false
+            }
+            selectedItemVariable.value = item
+        } else {
+            selectedItemVariable.value = nil
+        }
+    }
+    
+    func timeIntervalForPan(_ pan: UIPanGestureRecognizer) -> TimeInterval {
+        let translationX = pan.translation(in: pan.view!).x
+        let fraction = translationX/collectionViewContentWidth
+        let timeInterval = Double(fraction) * videoDuration
+        return timeInterval
     }
     
     func copyItemsBeforeEditVideo() {
-        videoItem.isNeedCompose = true
         copyVideoItem = videoItem.copy()
-        copyAudioItems = audioItems.map{ $0.copy() }
+        copyAudioItems = audioItemsVariable.value.map{ $0.copy() }
     }
     
-    func updateItemEditedStartTime(_ item: MediaComposeItem, time: TimeInterval) {
-        item.editedStartTimeVarible.value = targetTimeForItem(item, time: time)
+    func updateItemEditedStartTime(_ item: MediaComposeItem, timeInterval: TimeInterval) {
+        item.editedStartTimeVarible.value = targetTimeForItem(item, timeInterval: timeInterval)
     }
     
-    func updateItemEditedEndTime(_ item: MediaComposeItem, time: TimeInterval) {
-        item.editedEndTimeVarible.value = targetTimeForItem(item, time: time)
+    func updateItemEditedEndTime(_ item: MediaComposeItem, timeInterval: TimeInterval) {
+        item.editedEndTimeVarible.value = targetTimeForItem(item, timeInterval: timeInterval)
     }
     
-    private func targetTimeForItem(_ item: MediaComposeItem, time: TimeInterval) -> TimeInterval {
-        var targetTime = min(max(time, item.startTime), item.endTime)
+    private func targetTimeForItem(_ item: MediaComposeItem, timeInterval: TimeInterval) -> TimeInterval {
+        var targetTime = min(max(timeInterval, item.startTime), item.endTime)
         
         // 并且在视频的编辑后的范围内
         if item != videoItem {
@@ -199,7 +216,7 @@ extension MediaComposeViewModel {
     func moveAudioItemsToRight() {
         let videoStartTime = videoItem.editedStartTimeVarible.value
 
-        for (idx, audioItem) in audioItems.enumerated() {
+        for (idx, audioItem) in audioItemsVariable.value.enumerated() {
             
             let copyAudioItem = copyAudioItems[idx]
             let copyAudioStartTime = copyAudioItem.editedStartTimeVarible.value
@@ -219,7 +236,7 @@ extension MediaComposeViewModel {
         
         let videoEndTime = videoItem.editedEndTimeVarible.value
         
-        for (idx, audioItem) in audioItems.enumerated() {
+        for (idx, audioItem) in audioItemsVariable.value.enumerated() {
             
             let copyAudioItem = copyAudioItems[idx]
             let copyAudioEndTime = copyAudioItem.editedEndTimeVarible.value
@@ -233,5 +250,76 @@ extension MediaComposeViewModel {
             audioItem.editedStartTimeVarible.value = copyAudioItem.editedStartTimeVarible.value + timeInterval
             audioItem.editedEndTimeVarible.value = copyAudioEndTime + timeInterval
         }
+    }
+    
+    func copyAudioItemBeforeEditAudio() {
+        guard let audioItem = selectedItemVariable.value else {
+            return
+        }
+        copyAudioItem = audioItem.copy()
+    }
+    
+    func updateAudioItemTimes(_ item: MediaComposeItem, timeInterval: TimeInterval) {
+        
+        let limitStartTime = videoItem.editedStartTimeVarible.value
+        let limitEndTime = videoItem.editedEndTimeVarible.value
+        
+        var timeInterval = timeInterval
+        
+        var editedStartTime = copyAudioItem.editedStartTimeVarible.value + timeInterval
+        if editedStartTime < limitStartTime {
+            timeInterval += limitStartTime - editedStartTime
+            editedStartTime = copyAudioItem.editedStartTimeVarible.value + timeInterval
+        }
+        
+        var editedEndTime = copyAudioItem.editedEndTimeVarible.value + timeInterval
+        if editedEndTime > limitEndTime {
+            timeInterval += limitEndTime - editedEndTime
+            editedStartTime = copyAudioItem.editedStartTimeVarible.value + timeInterval
+            editedEndTime = copyAudioItem.editedEndTimeVarible.value + timeInterval
+        }
+        
+        let startTime = copyAudioItem.startTime + timeInterval
+        let endTime = copyAudioItem.endTime + timeInterval
+        item.startTime = startTime
+        item.endTime = endTime
+        item.editedStartTimeVarible.value = editedStartTime
+        item.editedEndTimeVarible.value = editedEndTime
+    }
+}
+
+
+// MARK : - 音频输入区域
+extension MediaComposeViewModel {
+    
+    func addRecordItem() {
+        let recordItem = MediaComposeItem()
+        recordItem.type = .record
+        let currentTime = playProgressVariable.value * videoDuration
+        recordItem.startTime = currentTime
+        recordItem.editedStartTimeVarible.value = currentTime
+        recordItem.editedEndTimeVarible.value = currentTime
+        audioItemsVariable.value.append(recordItem)
+        recordingItem = recordItem
+    }
+    
+    func finishAddRecordItem(fileUrl: URL) {
+        guard let recordItem = recordingItem else {
+            return
+        }
+        let currentTime = playProgressVariable.value * videoDuration
+        recordItem.editedEndTimeVarible.value = currentTime
+        recordItem.endTime = currentTime
+        recordItem.fileUrl = fileUrl
+        recordItem.isSelectedVariable.value = false
+        recordingItem = nil
+    }
+    
+    func removeAudioItem(_ item: MediaComposeItem) {
+        updateItemSelected(item, isSelected: false)
+        if let idx = audioItemsVariable.value.index(of: item) {
+            audioItemsVariable.value.remove(at: idx)
+        }
+        deleteItemSubject.onNext(item)
     }
 }

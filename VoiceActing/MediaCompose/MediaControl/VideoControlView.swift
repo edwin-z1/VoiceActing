@@ -13,6 +13,9 @@ import RxCocoa
 
 class VideoControlView: UIView {
     
+    static let collectionViewInsetTop: CGFloat = 25
+    static let itemHeight: CGFloat = 60
+    
     var viewModel: MediaComposeViewModel! {
         didSet {
             update()
@@ -34,6 +37,7 @@ class VideoControlView: UIView {
         editView.alpha = 0
         return editView
     }()
+    
     private lazy var maskLayer: CALayer = {
         let maskLayer = CALayer()
         maskLayer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
@@ -43,12 +47,7 @@ class VideoControlView: UIView {
     private var generator: AVAssetImageGenerator!
     private var timesVariable = Variable<[NSValue]>([])
     
-    private var panBeganTime: TimeInterval = 0
-    
     private let bag = DisposeBag()
-    
-    private let collectionViewInsetTop: CGFloat = 25
-    private let itemHeight: CGFloat = 60
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,7 +56,8 @@ class VideoControlView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layout.sectionInset = UIEdgeInsets(top: collectionViewInsetTop, left: 0, bottom: bounds.height - collectionViewInsetTop - itemHeight, right: 0)
+        let collectionViewInsetTop = VideoControlView.collectionViewInsetTop
+        layout.sectionInset = UIEdgeInsets(top: collectionViewInsetTop, left: 0, bottom: bounds.height - collectionViewInsetTop - VideoControlView.itemHeight, right: 0)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: bs.width/2, bottom: 0, right: bs.width/2)
         scrollView.frame = collectionView.frame
         scrollView.contentInset = collectionView.contentInset
@@ -110,11 +110,10 @@ private extension VideoControlView {
             .disposed(by: bag)
         
         // 限制滑动区域
-        Observable.merge([scrollView.rx.didEndDragging.map{_ in },
-                          scrollView.rx.willBeginDecelerating.map{_ in },
-                          scrollView.rx.didEndDecelerating.map{_ in }])
+        scrollView.rx.didScroll
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] (_) in
+                
                 let insetX = self.scrollView.contentInset.left
                 let startTime = self.viewModel.videoItem.editedStartTimeVarible.value
                 let startValue = startTime/self.viewModel.videoDuration
@@ -126,9 +125,9 @@ private extension VideoControlView {
                 
                 let offsetX = self.scrollView.contentOffset.x
                 if offsetX < minOffsetX {
-                    self.scrollView.setContentOffset(CGPoint(x: minOffsetX, y: 0), animated: true)
+                    self.scrollView.contentOffset = CGPoint(x: minOffsetX, y: 0)
                 } else if offsetX > maxOffsetX {
-                    self.scrollView.setContentOffset(CGPoint(x: maxOffsetX, y: 0), animated: true)
+                    self.scrollView.contentOffset = CGPoint(x: maxOffsetX, y: 0)
                 }
             })
             .disposed(by: bag)
@@ -141,14 +140,9 @@ private extension VideoControlView {
                 let isVideoItemSelected = videoItem.isSelectedVariable.value
                 
                 if location.y <= self.editView.frame.maxY {
-                    self.viewModel.updateItemSelected(videoItem, selected: !isVideoItemSelected)
-                } else {
-                    self.viewModel.updateItemSelected(videoItem, selected: false)
-                }
-                
-                if let selectedItem = self.viewModel.selectedItem,
-                    selectedItem != videoItem {
-                    self.viewModel.updateItemSelected(selectedItem, selected: false)
+                    self.viewModel.updateItemSelected(videoItem, isSelected: !isVideoItemSelected)
+                } else if let selectedItem = self.viewModel.selectedItemVariable.value {
+                    self.viewModel.updateItemSelected(selectedItem, isSelected: false)
                 }
             })
             .disposed(by: bag)
@@ -157,14 +151,10 @@ private extension VideoControlView {
         editView.leftPan.rx.event
             .subscribe(onNext: { [unowned self] (pan) in
                 
-                let videoItem = self.viewModel.videoItem!
                 switch pan.state {
                 case .began:
-                    self.panBeganTime = videoItem.editedStartTimeVarible.value
                     self.viewModel.copyItemsBeforeEditVideo()
                 case .changed:
-                    let time = self.timeIntervalForPan(pan) + self.panBeganTime
-                    self.viewModel.updateItemEditedStartTime(videoItem, time: time)
                     self.viewModel.moveAudioItemsToRight()
                 case .cancelled:fallthrough
                 case .ended:
@@ -177,14 +167,10 @@ private extension VideoControlView {
         editView.rightPan.rx.event
             .subscribe(onNext: { [unowned self] (pan) in
                 
-                let videoItem = self.viewModel.videoItem!
                 switch pan.state {
                 case .began:
-                    self.panBeganTime = videoItem.editedEndTimeVarible.value
                     self.viewModel.copyItemsBeforeEditVideo()
                 case .changed:
-                    let time = self.timeIntervalForPan(pan) + self.panBeganTime
-                    self.viewModel.updateItemEditedEndTime(videoItem, time: time)
                     self.viewModel.moveAudioItemsToLeft()
                 case .cancelled:fallthrough
                 case .ended:
@@ -204,10 +190,10 @@ private extension VideoControlView {
         
         let originX = -MediaEditComponentView.handleWidth
         let width = collectionViewContentWidth + MediaEditComponentView.handleWidth * 2
-        editView.frame = CGRect(x: originX, y: 0, width: width, height: collectionViewInsetTop + itemHeight)
+        editView.frame = CGRect(x: originX, y: 0, width: width, height: VideoControlView.collectionViewInsetTop + VideoControlView.itemHeight)
         
         collectionView.layer.mask = maskLayer
-        maskLayer.frame = CGRect(x: 0, y: collectionViewInsetTop, width: collectionViewContentWidth, height: itemHeight)
+        maskLayer.frame = CGRect(x: 0, y: VideoControlView.collectionViewInsetTop, width: collectionViewContentWidth, height: VideoControlView.itemHeight)
     }
     
     func updateViewModelPlayProgress() {
@@ -215,13 +201,6 @@ private extension VideoControlView {
         let offsetX = scrollView.contentOffset.x + insetX
         let progress = Double(offsetX/scrollView.contentSize.width)
         viewModel.updatePlayProgress(progress)
-    }
-    
-    func timeIntervalForPan(_ pan: UIPanGestureRecognizer) -> TimeInterval {
-        let translationX = pan.translation(in: self).x
-        let fraction = translationX/scrollView.contentSize.width
-        let timeInterval = Double(fraction) * viewModel.videoDuration
-        return timeInterval
     }
 }
 
@@ -244,6 +223,7 @@ private extension VideoControlView {
         generator.requestedTimeToleranceAfter = .zero
         generator.requestedTimeToleranceBefore = .zero
         
+        let itemHeight: CGFloat = VideoControlView.itemHeight
         var itemWidth: CGFloat = itemHeight
         if let videoTrack = asset.tracks(withMediaType: .video).first {
             let renderSize = videoTrack.bs.renderSize
@@ -276,6 +256,7 @@ private extension VideoControlView {
     
     func observeViewModel() {
         
+        // MARK: - play
         viewModel.playProgressVariable.asObservable()
             .map { [unowned self] (progress) -> String in
                 let time = self.viewModel.videoDuration * progress
@@ -296,7 +277,9 @@ private extension VideoControlView {
             .bind(to: scrollView.rx.contentOffset)
             .disposed(by: bag)
         
+        // MARK: - video item
         let videoItem = viewModel.videoItem!
+        editView.viewModel = viewModel
         editView.mediaItem = videoItem
         
         videoItem.isSelectedVariable.asObservable()
@@ -324,6 +307,18 @@ private extension VideoControlView {
             .skip(1)
             .subscribe(onNext: { [unowned self] (endTime) in
                 self.updateWidth()
+            })
+            .disposed(by: bag)
+        
+        // MARK: - audio items
+        viewModel.audioItemsVariable.asObservable()
+            .skip(1)
+            .subscribe(onNext: { [unowned self] (items) in
+                
+                let audioEditViews = self.scrollView.subviews.filter { $0 is AudioEditView } as! [AudioEditView]
+                if audioEditViews.count < items.count {
+                    self.addAudioEditView()
+                } 
             })
             .disposed(by: bag)
     }
@@ -355,5 +350,21 @@ private extension VideoControlView {
         CATransaction.setDisableActions(true)
         maskLayer.frame = CGRect(x: maskLayerFrame.origin.x, y: maskLayerFrame.origin.y, width: width, height: maskLayerFrame.height)
         CATransaction.commit()
+    }
+    
+    func addAudioEditView() {
+        guard let audioItem = viewModel.audioItemsVariable.value.last else {
+            return
+        }
+        let audioEditView = AudioEditView.bs.instantiateFromNib
+        audioEditView.viewModel = viewModel
+        audioEditView.audioItem = audioItem
+        scrollView.addSubview(audioEditView)
+        
+        audioItem.isSelectedVariable.asObservable()
+            .subscribe(onNext: { [unowned self, unowned audioEditView] (isSelected) in
+                self.scrollView.bringSubviewToFront(audioEditView)
+            })
+            .disposed(by: audioEditView.bag)
     }
 }
