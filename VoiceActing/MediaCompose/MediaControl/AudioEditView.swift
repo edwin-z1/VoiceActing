@@ -147,14 +147,14 @@ private extension AudioEditView {
             break
         }
         
-        audioItem.editedStartTimeVarible.asObservable()
+        audioItem.editedStartTimeVariable.asObservable()
             .subscribe(onNext: { [unowned self] (_) in
                 self.updateOriginX()
                 self.updateWidth()
             })
             .disposed(by: bag)
         
-        audioItem.editedEndTimeVarible.asObservable()
+        audioItem.editedEndTimeVariable.asObservable()
             .subscribe(onNext: { [unowned self] (_) in
                 self.updateWidth()
             })
@@ -198,15 +198,15 @@ private extension AudioEditView {
     
     func updateOriginX() {
 
-        let startValue = audioItem.editedStartTimeVarible.value/viewModel.videoDuration
+        let startValue = audioItem.editedStartTimeVariable.value/viewModel.videoDuration
         let leading = CGFloat(startValue) * viewModel.collectionViewContentWidth
         bs.origin.x = leading - MediaEditComponentView.handleWidth
     }
     
     func updateWidth() {
         
-        let startValue = audioItem.editedStartTimeVarible.value/viewModel.videoDuration
-        let endValue = audioItem.editedEndTimeVarible.value/viewModel.videoDuration
+        let startValue = audioItem.editedStartTimeVariable.value/viewModel.videoDuration
+        let endValue = audioItem.editedEndTimeVariable.value/viewModel.videoDuration
         
         let widthValue = endValue - startValue
         let width = CGFloat(widthValue) * viewModel.collectionViewContentWidth

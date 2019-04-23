@@ -68,12 +68,12 @@ private extension MediaComposeViewModel {
     func setupVideoItem() {
         videoItem = MediaComposeItem()
         videoItem.type = .video
-        videoItem.editedEndTimeVarible.value = videoDuration
+        videoItem.editedEndTimeVariable.value = videoDuration
         videoItem.endTime = videoDuration
         videoItem.videoAsset = videoAsset
         videoItem.isNeedCompose = false
         
-        videoItem.editedStartTimeVarible.asObservable()
+        videoItem.editedStartTimeVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (startTime) in
                 
@@ -86,12 +86,12 @@ private extension MediaComposeViewModel {
                     self.playProgressVariable.value = startProgress
                 }
                 
-                let duration = self.videoItem.editedEndTimeVarible.value - startTime
+                let duration = self.videoItem.editedEndTimeVariable.value - startTime
                 self.durationTextVariable.value = duration.bs.colonString
             })
             .disposed(by: bag)
         
-        videoItem.editedEndTimeVarible.asObservable()
+        videoItem.editedEndTimeVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (endTime) in
                 
@@ -104,7 +104,7 @@ private extension MediaComposeViewModel {
                     self.playProgressVariable.value = endProgress
                 }
 
-                let duration = endTime - self.videoItem.editedStartTimeVarible.value
+                let duration = endTime - self.videoItem.editedStartTimeVariable.value
                 self.durationTextVariable.value = duration.bs.colonString
             })
             .disposed(by: bag)
@@ -130,7 +130,7 @@ extension MediaComposeViewModel {
         if isRecordVariable.value {
             isRecordVariable.value = false
         } else {
-            let editedEndProgress = videoItem.editedEndTimeVarible.value/videoDuration
+            let editedEndProgress = videoItem.editedEndTimeVariable.value/videoDuration
             if editedEndProgress - playProgressVariable.value > 0.01 {
                 isPlayVariable.value = !isPlayVariable.value
             }
@@ -138,7 +138,7 @@ extension MediaComposeViewModel {
     }
     
     var endBoundaryObservable: Observable<NSValue> {
-        return videoItem.editedEndTimeVarible.asObservable()
+        return videoItem.editedEndTimeVariable.asObservable()
             .map {
                 let endTime = CMTime(seconds: $0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
                 return NSValue(time: endTime)
@@ -153,7 +153,7 @@ extension MediaComposeViewModel {
     func updatePlayProgressByPlayerWithTime(_ time: TimeInterval) {
         // 是录音 且未完成录制
         if let recordItem = recordingItem {
-            recordItem.editedEndTimeVarible.value = time
+            recordItem.editedEndTimeVariable.value = time
         }
         
         let progress = time/videoDuration
@@ -190,17 +190,12 @@ extension MediaComposeViewModel {
         return timeInterval
     }
     
-    func copyItemsBeforeEditVideo() {
-        copyVideoItem = videoItem.copy()
-        copyAudioItems = audioItemsVariable.value.map{ $0.copy() }
-    }
-    
     func updateItemEditedStartTime(_ item: MediaComposeItem, timeInterval: TimeInterval) {
-        item.editedStartTimeVarible.value = targetTimeForItem(item, timeInterval: timeInterval)
+        item.editedStartTimeVariable.value = targetTimeForItem(item, timeInterval: timeInterval)
     }
     
     func updateItemEditedEndTime(_ item: MediaComposeItem, timeInterval: TimeInterval) {
-        item.editedEndTimeVarible.value = targetTimeForItem(item, timeInterval: timeInterval)
+        item.editedEndTimeVariable.value = targetTimeForItem(item, timeInterval: timeInterval)
     }
     
     private func targetTimeForItem(_ item: MediaComposeItem, timeInterval: TimeInterval) -> TimeInterval {
@@ -208,18 +203,23 @@ extension MediaComposeViewModel {
         
         // 并且在视频的编辑后的范围内
         if item != videoItem {
-            targetTime = min(max(targetTime, videoItem.editedStartTimeVarible.value), videoItem.editedEndTimeVarible.value)
+            targetTime = min(max(targetTime, videoItem.editedStartTimeVariable.value), videoItem.editedEndTimeVariable.value)
         }
         return targetTime
     }
     
+    func copyItemsBeforeEditVideo() {
+        copyVideoItem = videoItem.copy()
+        copyAudioItems = audioItemsVariable.value.map{ $0.copy() }
+    }
+    
     func moveAudioItemsToRight() {
-        let videoStartTime = videoItem.editedStartTimeVarible.value
+        let videoStartTime = videoItem.editedStartTimeVariable.value
 
         for (idx, audioItem) in audioItemsVariable.value.enumerated() {
             
             let copyAudioItem = copyAudioItems[idx]
-            let copyAudioStartTime = copyAudioItem.editedStartTimeVarible.value
+            let copyAudioStartTime = copyAudioItem.editedStartTimeVariable.value
             
             let timeInterval = videoStartTime - copyAudioStartTime
             guard timeInterval > 0 else {
@@ -227,28 +227,28 @@ extension MediaComposeViewModel {
             }
             audioItem.startTime = copyAudioItem.startTime + timeInterval
             audioItem.endTime = copyAudioItem.endTime + timeInterval
-            audioItem.editedStartTimeVarible.value = copyAudioStartTime + timeInterval
-            audioItem.editedEndTimeVarible.value = copyAudioItem.editedEndTimeVarible.value + timeInterval
+            audioItem.editedStartTimeVariable.value = copyAudioStartTime + timeInterval
+            audioItem.editedEndTimeVariable.value = copyAudioItem.editedEndTimeVariable.value + timeInterval
         }
     }
     
     func moveAudioItemsToLeft() {
         
-        let videoEndTime = videoItem.editedEndTimeVarible.value
+        let videoEndTime = videoItem.editedEndTimeVariable.value
         
         for (idx, audioItem) in audioItemsVariable.value.enumerated() {
             
             let copyAudioItem = copyAudioItems[idx]
-            let copyAudioEndTime = copyAudioItem.editedEndTimeVarible.value
+            let copyAudioEndTime = copyAudioItem.editedEndTimeVariable.value
             
             let timeInterval = videoEndTime - copyAudioEndTime
-            guard timeInterval > 0 else {
+            guard timeInterval < 0 else {
                 continue
             }
             audioItem.startTime = copyAudioItem.startTime + timeInterval
             audioItem.endTime = copyAudioItem.endTime + timeInterval
-            audioItem.editedStartTimeVarible.value = copyAudioItem.editedStartTimeVarible.value + timeInterval
-            audioItem.editedEndTimeVarible.value = copyAudioEndTime + timeInterval
+            audioItem.editedStartTimeVariable.value = copyAudioItem.editedStartTimeVariable.value + timeInterval
+            audioItem.editedEndTimeVariable.value = copyAudioEndTime + timeInterval
         }
     }
     
@@ -261,30 +261,30 @@ extension MediaComposeViewModel {
     
     func updateAudioItemTimes(_ item: MediaComposeItem, timeInterval: TimeInterval) {
         
-        let limitStartTime = videoItem.editedStartTimeVarible.value
-        let limitEndTime = videoItem.editedEndTimeVarible.value
+        let limitStartTime = videoItem.editedStartTimeVariable.value
+        let limitEndTime = videoItem.editedEndTimeVariable.value
         
         var timeInterval = timeInterval
         
-        var editedStartTime = copyAudioItem.editedStartTimeVarible.value + timeInterval
+        var editedStartTime = copyAudioItem.editedStartTimeVariable.value + timeInterval
         if editedStartTime < limitStartTime {
             timeInterval += limitStartTime - editedStartTime
-            editedStartTime = copyAudioItem.editedStartTimeVarible.value + timeInterval
+            editedStartTime = copyAudioItem.editedStartTimeVariable.value + timeInterval
         }
         
-        var editedEndTime = copyAudioItem.editedEndTimeVarible.value + timeInterval
+        var editedEndTime = copyAudioItem.editedEndTimeVariable.value + timeInterval
         if editedEndTime > limitEndTime {
             timeInterval += limitEndTime - editedEndTime
-            editedStartTime = copyAudioItem.editedStartTimeVarible.value + timeInterval
-            editedEndTime = copyAudioItem.editedEndTimeVarible.value + timeInterval
+            editedStartTime = copyAudioItem.editedStartTimeVariable.value + timeInterval
+            editedEndTime = copyAudioItem.editedEndTimeVariable.value + timeInterval
         }
         
         let startTime = copyAudioItem.startTime + timeInterval
         let endTime = copyAudioItem.endTime + timeInterval
         item.startTime = startTime
         item.endTime = endTime
-        item.editedStartTimeVarible.value = editedStartTime
-        item.editedEndTimeVarible.value = editedEndTime
+        item.editedStartTimeVariable.value = editedStartTime
+        item.editedEndTimeVariable.value = editedEndTime
     }
 }
 
@@ -297,8 +297,8 @@ extension MediaComposeViewModel {
         recordItem.type = .record
         let currentTime = playProgressVariable.value * videoDuration
         recordItem.startTime = currentTime
-        recordItem.editedStartTimeVarible.value = currentTime
-        recordItem.editedEndTimeVarible.value = currentTime
+        recordItem.editedStartTimeVariable.value = currentTime
+        recordItem.editedEndTimeVariable.value = currentTime
         audioItemsVariable.value.append(recordItem)
         recordingItem = recordItem
     }
@@ -308,7 +308,7 @@ extension MediaComposeViewModel {
             return
         }
         let currentTime = playProgressVariable.value * videoDuration
-        recordItem.editedEndTimeVarible.value = currentTime
+        recordItem.editedEndTimeVariable.value = currentTime
         recordItem.endTime = currentTime
         recordItem.fileUrl = fileUrl
         recordItem.isSelectedVariable.value = false

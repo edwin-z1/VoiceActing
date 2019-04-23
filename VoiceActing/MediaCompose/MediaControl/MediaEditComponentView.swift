@@ -53,7 +53,7 @@ private extension MediaEditComponentView {
                 
                 switch pan.state {
                 case .began:
-                    self.panBeganTime = self.mediaItem.editedStartTimeVarible.value
+                    self.panBeganTime = self.mediaItem.editedStartTimeVariable.value
                 case .changed:
                     let timeInterval = self.viewModel.timeIntervalForPan(pan) + self.panBeganTime
                     self.viewModel.updateItemEditedStartTime(self.mediaItem, timeInterval: timeInterval)
@@ -70,7 +70,7 @@ private extension MediaEditComponentView {
 
                 switch pan.state {
                 case .began:
-                    self.panBeganTime = self.mediaItem.editedEndTimeVarible.value
+                    self.panBeganTime = self.mediaItem.editedEndTimeVariable.value
                 case .changed:
                     let timeInterval = self.viewModel.timeIntervalForPan(pan) + self.panBeganTime
                     self.viewModel.updateItemEditedEndTime(self.mediaItem, timeInterval: timeInterval)
@@ -85,13 +85,13 @@ private extension MediaEditComponentView {
     
     func update() {
         
-        mediaItem.editedStartTimeVarible.asObservable()
+        mediaItem.editedStartTimeVariable.asObservable()
             .throttle(0.1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (startTime) in
                 self.leftTimeLabel.text = startTime.bs.colonString
 
                 guard self.mediaItem.fileUrl != nil else { return }
-                let endTime = self.mediaItem.editedEndTimeVarible.value
+                let endTime = self.mediaItem.editedEndTimeVariable.value
                 let isHideLabel = (endTime - startTime < 1) && self.leftTimeLabel.alpha == 1
                 UIView.bs.animate(content: {
                     self.rightTimeLabel.alpha = isHideLabel ? 0 : 1
@@ -99,12 +99,12 @@ private extension MediaEditComponentView {
             })
             .disposed(by: updateBag)
         
-        mediaItem.editedEndTimeVarible.asObservable()
+        mediaItem.editedEndTimeVariable.asObservable()
             .throttle(0.1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] (endTime) in
                 self.rightTimeLabel.text = endTime.bs.colonString
                 
-                let startTime = self.mediaItem.editedStartTimeVarible.value
+                let startTime = self.mediaItem.editedStartTimeVariable.value
                 let isHideLabel = (endTime - startTime < 1) && self.rightTimeLabel.alpha == 1
                 UIView.bs.animate(content: {
                     self.leftTimeLabel.alpha = isHideLabel ? 0 : 1

@@ -13,7 +13,7 @@ import RxCocoa
 
 class MediaComposeItem: NSObject {
     
-    // MARK: - 音块一共有4种，原视频、录音、音乐、音效
+    // MARK: - 音块一共有3种，原视频、录音、音效
     enum MediaType: String {
         case video
         case record
@@ -26,9 +26,9 @@ class MediaComposeItem: NSObject {
     /// 最晚结束时间，由于音块可以拖动范围，这个是最晚时间的限制
     var endTime: TimeInterval = 0
     /// 被编辑的开始时间
-    let editedStartTimeVarible = Variable<TimeInterval>(0)
+    let editedStartTimeVariable = Variable<TimeInterval>(0)
     /// 被编辑的结束时间
-    let editedEndTimeVarible = Variable<TimeInterval>(0)
+    let editedEndTimeVariable = Variable<TimeInterval>(0)
     
     /// 媒体文件的沙盒路径
     var fileUrl: URL?
@@ -57,8 +57,8 @@ class MediaComposeItem: NSObject {
         let mediaBrick = MediaComposeItem()
         mediaBrick.startTime = startTime
         mediaBrick.endTime = endTime
-        mediaBrick.editedStartTimeVarible.value = editedStartTimeVarible.value
-        mediaBrick.editedEndTimeVarible.value = editedEndTimeVarible.value
+        mediaBrick.editedStartTimeVariable.value = editedStartTimeVariable.value
+        mediaBrick.editedEndTimeVariable.value = editedEndTimeVariable.value
         return mediaBrick
     }
 }

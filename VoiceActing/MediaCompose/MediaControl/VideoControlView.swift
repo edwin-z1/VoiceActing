@@ -115,11 +115,11 @@ private extension VideoControlView {
             .subscribe(onNext: { [unowned self] (_) in
                 
                 let insetX = self.scrollView.contentInset.left
-                let startTime = self.viewModel.videoItem.editedStartTimeVarible.value
+                let startTime = self.viewModel.videoItem.editedStartTimeVariable.value
                 let startValue = startTime/self.viewModel.videoDuration
                 let minOffsetX = self.scrollView.contentSize.width * CGFloat(startValue) - insetX
                 
-                let endTime = self.viewModel.videoItem.editedEndTimeVarible.value
+                let endTime = self.viewModel.videoItem.editedEndTimeVariable.value
                 let endValue = endTime/self.viewModel.videoDuration
                 let maxOffsetX = self.scrollView.contentSize.width * CGFloat(endValue) - insetX
                 
@@ -295,7 +295,7 @@ private extension VideoControlView {
             })
             .disposed(by: bag)
         
-        videoItem.editedStartTimeVarible.asObservable()
+        videoItem.editedStartTimeVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (startTime) in
                 self.updateOriginX()
@@ -303,7 +303,7 @@ private extension VideoControlView {
             })
             .disposed(by: bag)
         
-        videoItem.editedEndTimeVarible.asObservable()
+        videoItem.editedEndTimeVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (endTime) in
                 self.updateWidth()
@@ -325,7 +325,7 @@ private extension VideoControlView {
     
     func updateOriginX() {
         let videoItem = viewModel.videoItem!
-        let startValue = videoItem.editedStartTimeVarible.value/viewModel.videoDuration
+        let startValue = videoItem.editedStartTimeVariable.value/viewModel.videoDuration
         let leading = CGFloat(startValue) * scrollView.contentSize.width
         editView.bs.origin.x = leading - MediaEditComponentView.handleWidth
         
@@ -338,8 +338,8 @@ private extension VideoControlView {
     
     func updateWidth() {
         let videoItem = viewModel.videoItem!
-        let startValue = videoItem.editedStartTimeVarible.value/viewModel.videoDuration
-        let endValue = videoItem.editedEndTimeVarible.value/viewModel.videoDuration
+        let startValue = videoItem.editedStartTimeVariable.value/viewModel.videoDuration
+        let endValue = videoItem.editedEndTimeVariable.value/viewModel.videoDuration
         
         let widthValue = endValue - startValue
         let width = CGFloat(widthValue) * scrollView.contentSize.width

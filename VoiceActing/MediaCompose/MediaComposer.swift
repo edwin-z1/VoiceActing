@@ -93,8 +93,8 @@ struct MediaComposer {
                 // 然后把资源文件的音轨插入到composition的音轨
                 // 但是这些音频文件主要是在插入时间上有不同，原音轨用全范围即可，这里用到的范围会比较多
                 // 一些范围检查
-                let modifiedStartTime = max(audioBrick.editedStartTimeVarible.value, 0)
-                let modifiedEndTime = min(audioBrick.editedEndTimeVarible.value, videoAsset.duration.seconds)
+                let modifiedStartTime = max(audioBrick.editedStartTimeVariable.value, 0)
+                let modifiedEndTime = min(audioBrick.editedEndTimeVariable.value, videoAsset.duration.seconds)
                 guard modifiedStartTime < modifiedEndTime else { continue }
                 
                 // 参照音频文件的时间，是该音频资源内部的时间
