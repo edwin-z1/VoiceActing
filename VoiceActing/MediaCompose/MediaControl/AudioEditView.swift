@@ -143,6 +143,10 @@ private extension AudioEditView {
             darkColorView.backgroundColor = #colorLiteral(red: 0.662745098, green: 0.2784313725, blue: 1, alpha: 1)
             lightColorView.backgroundColor = #colorLiteral(red: 0.662745098, green: 0.2784313725, blue: 1, alpha: 0.4)
             waterImgView.tintColor = #colorLiteral(red: 0.662745098, green: 0.2784313725, blue: 1, alpha: 1)
+            audioItem.soundEffectImgVariable
+                .asDriver()
+                .drive(iconImgView.rx.image)
+                .disposed(by: bag)
         default:
             break
         }
@@ -209,6 +213,9 @@ private extension AudioEditView {
         let endValue = audioItem.editedEndTimeVariable.value/viewModel.videoDuration
         
         let widthValue = endValue - startValue
+        if widthValue <= 0 {
+            return;
+        }
         let width = CGFloat(widthValue) * viewModel.collectionViewContentWidth
         bs.width = width + 2 * MediaEditComponentView.handleWidth
         

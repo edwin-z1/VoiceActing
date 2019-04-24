@@ -143,6 +143,8 @@ private extension VideoControlView {
                     self.viewModel.updateItemSelected(videoItem, isSelected: !isVideoItemSelected)
                 } else if let selectedItem = self.viewModel.selectedItemVariable.value {
                     self.viewModel.updateItemSelected(selectedItem, isSelected: false)
+                } else if let soundEffectItem = self.viewModel.replacingSoundEffectItem {
+                    self.viewModel.updateItemSelected(soundEffectItem, isSelected: false)
                 }
             })
             .disposed(by: bag)

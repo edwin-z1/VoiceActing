@@ -11,7 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class AudioRecordView: UIView {
+class RecordView: UIView {
     
     var viewModel: MediaComposeViewModel! {
         didSet {
@@ -33,7 +33,7 @@ class AudioRecordView: UIView {
     }
 }
 
-private extension AudioRecordView {
+private extension RecordView {
     
     func setup() {
         let longPressGesture = UILongPressGestureRecognizer()
@@ -139,7 +139,7 @@ private extension AudioRecordView {
     }
 }
 
-private extension AudioRecordView {
+private extension RecordView {
     
     func addRecordingAnimation() {
         

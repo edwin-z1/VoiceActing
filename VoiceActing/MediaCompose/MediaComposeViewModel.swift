@@ -31,10 +31,12 @@ class MediaComposeViewModel: NSObject {
     private(set) var videoDuration: TimeInterval!
     private(set) var videoItem: MediaComposeItem!
     let audioItemsVariable: Variable<[MediaComposeItem]> = Variable([])
+    
     let selectedItemVariable: Variable<MediaComposeItem?> = Variable(nil)
     let deleteItemSubject: PublishSubject<MediaComposeItem> = PublishSubject()
     
     private var recordingItem: MediaComposeItem?
+    private(set) var replacingSoundEffectItem: MediaComposeItem?
     
     private let bag = DisposeBag()
     
@@ -177,10 +179,15 @@ extension MediaComposeViewModel {
                 lastSelectedItem != item {
                 lastSelectedItem.isSelectedVariable.value = false
             }
+            if let soundEffectItem = replacingSoundEffectItem,
+                soundEffectItem != item {
+                soundEffectItem.isSelectedVariable.value = false
+            }
             selectedItemVariable.value = item
         } else {
             selectedItemVariable.value = nil
         }
+        replacingSoundEffectItem = nil
     }
     
     func timeIntervalForPan(_ pan: UIPanGestureRecognizer) -> TimeInterval {
@@ -313,6 +320,38 @@ extension MediaComposeViewModel {
         recordItem.fileUrl = fileUrl
         recordItem.isSelectedVariable.value = false
         recordingItem = nil
+    }
+    
+    func addSoundEffectItem(_ soundEffect: SoundEffect) {
+        
+        var sdItem: MediaComposeItem!
+        
+        if let existItem = replacingSoundEffectItem {
+            sdItem = existItem
+        } else {
+            sdItem = MediaComposeItem()
+            sdItem.type = .soundEffect
+            
+            let currentTime = playProgressVariable.value * videoDuration
+            sdItem.startTime = currentTime
+            sdItem.editedStartTimeVariable.value = currentTime
+            
+            audioItemsVariable.value.append(sdItem)
+            
+            replacingSoundEffectItem = sdItem
+        }
+        
+        sdItem.fileUrl = soundEffect.fileUrl
+        sdItem.soundEffectImgVariable.value = soundEffect.iconImg
+
+        let asset = AVAsset(url: soundEffect.fileUrl)
+        let sdDuration = asset.duration.seconds
+        
+        let endTime = sdItem.startTime + sdDuration
+        sdItem.endTime = endTime
+        
+        let editedEndTime = min(videoItem.editedEndTimeVariable.value, endTime)
+        sdItem.editedEndTimeVariable.value = editedEndTime
     }
     
     func removeAudioItem(_ item: MediaComposeItem) {

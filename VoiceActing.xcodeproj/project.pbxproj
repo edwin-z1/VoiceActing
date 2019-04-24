@@ -8,13 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		4C4D7293B9B2EFA2C7AD65BE /* Pods_VoiceActing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FCBA9F72341450398ABBCB /* Pods_VoiceActing.framework */; };
-		84117661224B7FE400F8E8D5 /* AudioRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */; };
-		84117662224B7FE400F8E8D5 /* AudioRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117660224B7FE400F8E8D5 /* AudioRecordView.swift */; };
+		84117661224B7FE400F8E8D5 /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8411765F224B7FE400F8E8D5 /* RecordView.xib */; };
+		84117662224B7FE400F8E8D5 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117660224B7FE400F8E8D5 /* RecordView.swift */; };
 		8415465C224DC3EA00A89A4F /* AudioToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415465A224DC3EA00A89A4F /* AudioToolView.swift */; };
 		8415465D224DC3EA00A89A4F /* AudioToolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8415465B224DC3EA00A89A4F /* AudioToolView.xib */; };
 		84154661224DC8DC00A89A4F /* HitExtendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415465E224DC8DC00A89A4F /* HitExtendButton.swift */; };
 		84154662224DC8DC00A89A4F /* AnimationSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84154660224DC8DC00A89A4F /* AnimationSlider.swift */; };
 		84154664224DC94B00A89A4F /* UIResponder+NameBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84154663224DC94B00A89A4F /* UIResponder+NameBox.swift */; };
+		8417941A226EFFB400AB7104 /* sf_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179408226EFFB400AB7104 /* sf_2.mp3 */; };
+		8417941B226EFFB400AB7104 /* sf_13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179409226EFFB400AB7104 /* sf_13.mp3 */; };
+		8417941C226EFFB400AB7104 /* sf_12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8417940A226EFFB400AB7104 /* sf_12.mp3 */; };
+		8417941D226EFFB400AB7104 /* sf_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8417940B226EFFB400AB7104 /* sf_3.mp3 */; };
+		8417941E226EFFB400AB7104 /* sf_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8417940C226EFFB400AB7104 /* sf_1.mp3 */; };
+		8417941F226EFFB400AB7104 /* sf_10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8417940D226EFFB400AB7104 /* sf_10.mp3 */; };
+		84179420226EFFB400AB7104 /* sf_11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8417940E226EFFB400AB7104 /* sf_11.mp3 */; };
+		84179421226EFFB400AB7104 /* sf_0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8417940F226EFFB400AB7104 /* sf_0.mp3 */; };
+		84179422226EFFB400AB7104 /* sf_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179410226EFFB400AB7104 /* sf_4.mp3 */; };
+		84179423226EFFB400AB7104 /* sf_15.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179411226EFFB400AB7104 /* sf_15.mp3 */; };
+		84179424226EFFB400AB7104 /* sf_14.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179412226EFFB400AB7104 /* sf_14.mp3 */; };
+		84179425226EFFB400AB7104 /* sf_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179413226EFFB400AB7104 /* sf_5.mp3 */; };
+		84179426226EFFB400AB7104 /* sf_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179414226EFFB400AB7104 /* sf_7.mp3 */; };
+		84179427226EFFB400AB7104 /* sf_16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179415226EFFB400AB7104 /* sf_16.mp3 */; };
+		84179428226EFFB400AB7104 /* sf_17.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179416226EFFB400AB7104 /* sf_17.mp3 */; };
+		84179429226EFFB400AB7104 /* sf_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179417226EFFB400AB7104 /* sf_6.mp3 */; };
+		8417942A226EFFB400AB7104 /* sf_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179418226EFFB400AB7104 /* sf_8.mp3 */; };
+		8417942B226EFFB400AB7104 /* sf_9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 84179419226EFFB400AB7104 /* sf_9.mp3 */; };
+		8417942D226EFFF600AB7104 /* SoundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417942C226EFFF600AB7104 /* SoundEffectView.swift */; };
+		8417942F226F000200AB7104 /* SoundEffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8417942E226F000200AB7104 /* SoundEffectView.xib */; };
+		84179434226F027B00AB7104 /* SoundEffectCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84179432226F027A00AB7104 /* SoundEffectCollectionCell.swift */; };
+		84179435226F027B00AB7104 /* SoundEffectCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84179433226F027A00AB7104 /* SoundEffectCollectionCell.xib */; };
+		84179440226F136500AB7104 /* SoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417943F226F136500AB7104 /* SoundEffect.swift */; };
 		84A48981223FAB1700A8D124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48980223FAB1700A8D124 /* AppDelegate.swift */; };
 		84A48983223FAB1700A8D124 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A48982223FAB1700A8D124 /* ViewController.swift */; };
 		84A48986223FAB1700A8D124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A48984223FAB1700A8D124 /* Main.storyboard */; };
@@ -68,13 +91,36 @@
 /* Begin PBXFileReference section */
 		6CA95BA3DCF5FF3C76FD77CA /* Pods-VoiceActing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.debug.xcconfig"; sourceTree = "<group>"; };
 		7EB21FE22BF8A5C96D5E631C /* Pods-VoiceActing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceActing.release.xcconfig"; path = "Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing.release.xcconfig"; sourceTree = "<group>"; };
-		8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioRecordView.xib; sourceTree = "<group>"; };
-		84117660224B7FE400F8E8D5 /* AudioRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecordView.swift; sourceTree = "<group>"; };
+		8411765F224B7FE400F8E8D5 /* RecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
+		84117660224B7FE400F8E8D5 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		8415465A224DC3EA00A89A4F /* AudioToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioToolView.swift; sourceTree = "<group>"; };
 		8415465B224DC3EA00A89A4F /* AudioToolView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioToolView.xib; sourceTree = "<group>"; };
 		8415465E224DC8DC00A89A4F /* HitExtendButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitExtendButton.swift; sourceTree = "<group>"; };
 		84154660224DC8DC00A89A4F /* AnimationSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationSlider.swift; sourceTree = "<group>"; };
 		84154663224DC94B00A89A4F /* UIResponder+NameBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+NameBox.swift"; sourceTree = "<group>"; };
+		84179408226EFFB400AB7104 /* sf_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_2.mp3; sourceTree = "<group>"; };
+		84179409226EFFB400AB7104 /* sf_13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_13.mp3; sourceTree = "<group>"; };
+		8417940A226EFFB400AB7104 /* sf_12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_12.mp3; sourceTree = "<group>"; };
+		8417940B226EFFB400AB7104 /* sf_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_3.mp3; sourceTree = "<group>"; };
+		8417940C226EFFB400AB7104 /* sf_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_1.mp3; sourceTree = "<group>"; };
+		8417940D226EFFB400AB7104 /* sf_10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_10.mp3; sourceTree = "<group>"; };
+		8417940E226EFFB400AB7104 /* sf_11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_11.mp3; sourceTree = "<group>"; };
+		8417940F226EFFB400AB7104 /* sf_0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_0.mp3; sourceTree = "<group>"; };
+		84179410226EFFB400AB7104 /* sf_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_4.mp3; sourceTree = "<group>"; };
+		84179411226EFFB400AB7104 /* sf_15.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_15.mp3; sourceTree = "<group>"; };
+		84179412226EFFB400AB7104 /* sf_14.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_14.mp3; sourceTree = "<group>"; };
+		84179413226EFFB400AB7104 /* sf_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_5.mp3; sourceTree = "<group>"; };
+		84179414226EFFB400AB7104 /* sf_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_7.mp3; sourceTree = "<group>"; };
+		84179415226EFFB400AB7104 /* sf_16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_16.mp3; sourceTree = "<group>"; };
+		84179416226EFFB400AB7104 /* sf_17.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_17.mp3; sourceTree = "<group>"; };
+		84179417226EFFB400AB7104 /* sf_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_6.mp3; sourceTree = "<group>"; };
+		84179418226EFFB400AB7104 /* sf_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_8.mp3; sourceTree = "<group>"; };
+		84179419226EFFB400AB7104 /* sf_9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sf_9.mp3; sourceTree = "<group>"; };
+		8417942C226EFFF600AB7104 /* SoundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffectView.swift; sourceTree = "<group>"; };
+		8417942E226F000200AB7104 /* SoundEffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SoundEffectView.xib; sourceTree = "<group>"; };
+		84179432226F027A00AB7104 /* SoundEffectCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffectCollectionCell.swift; sourceTree = "<group>"; };
+		84179433226F027A00AB7104 /* SoundEffectCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SoundEffectCollectionCell.xib; sourceTree = "<group>"; };
+		8417943F226F136500AB7104 /* SoundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
 		84A4897D223FAB1700A8D124 /* VoiceActing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceActing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A48980223FAB1700A8D124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A48982223FAB1700A8D124 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +206,39 @@
 			path = AnimationSlider;
 			sourceTree = "<group>";
 		};
+		84179406226EFFA300AB7104 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				84179407226EFFB400AB7104 /* SoundEffect */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		84179407226EFFB400AB7104 /* SoundEffect */ = {
+			isa = PBXGroup;
+			children = (
+				84179408226EFFB400AB7104 /* sf_2.mp3 */,
+				84179409226EFFB400AB7104 /* sf_13.mp3 */,
+				8417940A226EFFB400AB7104 /* sf_12.mp3 */,
+				8417940B226EFFB400AB7104 /* sf_3.mp3 */,
+				8417940C226EFFB400AB7104 /* sf_1.mp3 */,
+				8417940D226EFFB400AB7104 /* sf_10.mp3 */,
+				8417940E226EFFB400AB7104 /* sf_11.mp3 */,
+				8417940F226EFFB400AB7104 /* sf_0.mp3 */,
+				84179410226EFFB400AB7104 /* sf_4.mp3 */,
+				84179411226EFFB400AB7104 /* sf_15.mp3 */,
+				84179412226EFFB400AB7104 /* sf_14.mp3 */,
+				84179413226EFFB400AB7104 /* sf_5.mp3 */,
+				84179414226EFFB400AB7104 /* sf_7.mp3 */,
+				84179415226EFFB400AB7104 /* sf_16.mp3 */,
+				84179416226EFFB400AB7104 /* sf_17.mp3 */,
+				84179417226EFFB400AB7104 /* sf_6.mp3 */,
+				84179418226EFFB400AB7104 /* sf_8.mp3 */,
+				84179419226EFFB400AB7104 /* sf_9.mp3 */,
+			);
+			path = SoundEffect;
+			sourceTree = "<group>";
+		};
 		84A48974223FAB1700A8D124 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +262,7 @@
 			children = (
 				84A48980223FAB1700A8D124 /* AppDelegate.swift */,
 				84A48982223FAB1700A8D124 /* ViewController.swift */,
+				84179406226EFFA300AB7104 /* Assets */,
 				84A48A102241F0E100A8D124 /* Extension */,
 				84A48A3D2242211300A8D124 /* Vendor */,
 				84A48A042241F0E100A8D124 /* PhotosSelect */,
@@ -366,8 +446,13 @@
 			children = (
 				84A48AD52248C71000A8D124 /* AudioSelectionView.swift */,
 				84A48ACD2248C71000A8D124 /* AudioSelectionCollectionCell.swift */,
-				84117660224B7FE400F8E8D5 /* AudioRecordView.swift */,
-				8411765F224B7FE400F8E8D5 /* AudioRecordView.xib */,
+				84117660224B7FE400F8E8D5 /* RecordView.swift */,
+				8411765F224B7FE400F8E8D5 /* RecordView.xib */,
+				8417943F226F136500AB7104 /* SoundEffect.swift */,
+				8417942C226EFFF600AB7104 /* SoundEffectView.swift */,
+				8417942E226F000200AB7104 /* SoundEffectView.xib */,
+				84179432226F027A00AB7104 /* SoundEffectCollectionCell.swift */,
+				84179433226F027A00AB7104 /* SoundEffectCollectionCell.xib */,
 			);
 			path = AudioSelection;
 			sourceTree = "<group>";
@@ -442,16 +527,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84117661224B7FE400F8E8D5 /* AudioRecordView.xib in Resources */,
+				8417941F226EFFB400AB7104 /* sf_10.mp3 in Resources */,
+				84179424226EFFB400AB7104 /* sf_14.mp3 in Resources */,
+				8417941A226EFFB400AB7104 /* sf_2.mp3 in Resources */,
+				84179421226EFFB400AB7104 /* sf_0.mp3 in Resources */,
+				84117661224B7FE400F8E8D5 /* RecordView.xib in Resources */,
 				84A489F72241E9FA00A8D124 /* MediaCompose.storyboard in Resources */,
 				84EA1570224CA156008F523F /* AudioEditView.xib in Resources */,
 				8415465D224DC3EA00A89A4F /* AudioToolView.xib in Resources */,
+				8417941C226EFFB400AB7104 /* sf_12.mp3 in Resources */,
 				84A4898B223FAB1900A8D124 /* LaunchScreen.storyboard in Resources */,
 				84A48988223FAB1900A8D124 /* Assets.xcassets in Resources */,
+				84179420226EFFB400AB7104 /* sf_11.mp3 in Resources */,
+				8417941B226EFFB400AB7104 /* sf_13.mp3 in Resources */,
+				8417941D226EFFB400AB7104 /* sf_3.mp3 in Resources */,
+				84179429226EFFB400AB7104 /* sf_6.mp3 in Resources */,
+				84179423226EFFB400AB7104 /* sf_15.mp3 in Resources */,
 				84A48986223FAB1700A8D124 /* Main.storyboard in Resources */,
+				84179435226F027B00AB7104 /* SoundEffectCollectionCell.xib in Resources */,
+				8417941E226EFFB400AB7104 /* sf_1.mp3 in Resources */,
 				84A48A292241F0E100A8D124 /* PhotosSelectViewController.storyboard in Resources */,
+				8417942B226EFFB400AB7104 /* sf_9.mp3 in Resources */,
 				84A48AA8224223C300A8D124 /* VideoControlView.xib in Resources */,
+				8417942A226EFFB400AB7104 /* sf_8.mp3 in Resources */,
+				8417942F226F000200AB7104 /* SoundEffectView.xib in Resources */,
+				84179428226EFFB400AB7104 /* sf_17.mp3 in Resources */,
+				84179422226EFFB400AB7104 /* sf_4.mp3 in Resources */,
 				84A48AA9224223C300A8D124 /* MediaEditComponentView.xib in Resources */,
+				84179425226EFFB400AB7104 /* sf_5.mp3 in Resources */,
+				84179427226EFFB400AB7104 /* sf_16.mp3 in Resources */,
+				84179426226EFFB400AB7104 /* sf_7.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,8 +629,10 @@
 			files = (
 				84A48AAB224223C300A8D124 /* VideoControlView.swift in Sources */,
 				84A48A3A22421F3F00A8D124 /* MediaComposeViewController.swift in Sources */,
+				84179440226F136500AB7104 /* SoundEffect.swift in Sources */,
 				84A48A502242231C00A8D124 /* AVAsset+AVComposition.swift in Sources */,
 				84A48A2A2241F0E100A8D124 /* AlbumsSelectViewController.swift in Sources */,
+				84179434226F027B00AB7104 /* SoundEffectCollectionCell.swift in Sources */,
 				84A48AAD2242261C00A8D124 /* MediaComposeViewModel.swift in Sources */,
 				84A48A322241F0E100A8D124 /* NSObject+bs.swift in Sources */,
 				84A48AF32248C71000A8D124 /* AudioSelectionView.swift in Sources */,
@@ -534,12 +641,13 @@
 				84A48AED2248C71000A8D124 /* AudioSelectionCollectionCell.swift in Sources */,
 				84A48A332241F0E100A8D124 /* String+bs.swift in Sources */,
 				84A48A4F2242231C00A8D124 /* AVAssetExportSession+NameBox.swift in Sources */,
-				84117662224B7FE400F8E8D5 /* AudioRecordView.swift in Sources */,
+				84117662224B7FE400F8E8D5 /* RecordView.swift in Sources */,
 				84A48983223FAB1700A8D124 /* ViewController.swift in Sources */,
 				84A48A512242231C00A8D124 /* AVAssetTrack+NameBox.swift in Sources */,
 				84A48ABA2244ED9900A8D124 /* UIImage+BSCategory.m in Sources */,
 				84A48A342241F0E100A8D124 /* TimeInterval+bs.swift in Sources */,
 				84A48A1F2241F0E100A8D124 /* Adaptable.swift in Sources */,
+				8417942D226EFFF600AB7104 /* SoundEffectView.swift in Sources */,
 				84A48A262241F0E100A8D124 /* PhotosSelectCollectionCell.swift in Sources */,
 				8415465C224DC3EA00A89A4F /* AudioToolView.swift in Sources */,
 				84A48A232241F0E100A8D124 /* AlbumsSelectTableCell.swift in Sources */,

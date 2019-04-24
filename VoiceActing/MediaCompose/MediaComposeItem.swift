@@ -40,7 +40,7 @@ class MediaComposeItem: NSObject {
     var videoComposition: AVMutableVideoComposition?
     
     /// 用于 type == .soundEffect
-    let soundEffectIconUrlVariable = Variable<URL?>(nil)
+    let soundEffectImgVariable = Variable<UIImage?>(nil)
     
     // MARK: - 处理UI逻辑
     let isSelectedVariable = Variable<Bool>(false)

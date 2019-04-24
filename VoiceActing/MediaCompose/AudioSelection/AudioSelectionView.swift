@@ -21,6 +21,7 @@ class AudioSelectionView: UIView {
     var viewModel: MediaComposeViewModel! {
         didSet {
             recordView.viewModel = viewModel
+            soundEffectView.viewModel = viewModel
         }
     }
     
@@ -28,7 +29,8 @@ class AudioSelectionView: UIView {
     @IBOutlet weak var selectionCollectionView: UICollectionView!
     private let selectedIndexPathVariable: Variable<IndexPath> = Variable([0, 0])
     
-    private let recordView = AudioRecordView.bs.instantiateFromNib
+    private let recordView = RecordView.bs.instantiateFromNib
+    private let soundEffectView = SoundEffectView.bs.instantiateFromNib
     private weak var displayingSubview: UIView?
     
     private let bag = DisposeBag()
@@ -93,7 +95,7 @@ private extension AudioSelectionView {
     }
     
     func setupSubview() {
-        [recordView].forEach {
+        [recordView, soundEffectView].forEach {
             $0.alpha = 0
             self.contentView.addSubview($0)
         }
@@ -101,6 +103,10 @@ private extension AudioSelectionView {
             maker.size.equalTo(CGSize(width: 90, height: 90))
             maker.centerX.equalToSuperview()
             maker.bottom.equalToSuperview().offset(-5)
+        }
+        
+        soundEffectView.snp.makeConstraints { (maker) in
+            maker.edges.equalToSuperview()
         }
     }
     
@@ -110,6 +116,8 @@ private extension AudioSelectionView {
         switch selectedIndexPathVariable.value.item {
         case 0:
             displayingSubview = recordView
+        case 1:
+            displayingSubview = soundEffectView
         default:
             return
         }
