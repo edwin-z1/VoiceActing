@@ -35,6 +35,7 @@ class SoundEffectView: UIView {
         let spacing = bs.width - hInset - (layout.itemSize.width * hCount)
         let interitemSpacing = spacing/(hCount - 1)
         layout.minimumInteritemSpacing = interitemSpacing
+        layout.sectionInset = UIEdgeInsets(top: 15, left: 10, bottom: 5.adaptHeight, right: 10)
     }
 }
 

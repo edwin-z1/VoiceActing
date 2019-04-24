@@ -57,7 +57,7 @@ class VideoControlView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         let collectionViewInsetTop = VideoControlView.collectionViewInsetTop
-        layout.sectionInset = UIEdgeInsets(top: collectionViewInsetTop, left: 0, bottom: bounds.height - collectionViewInsetTop - VideoControlView.itemHeight, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: collectionViewInsetTop, left: 0, bottom: bounds.height - collectionViewInsetTop - layout.itemSize.height, right: 0)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: bs.width/2, bottom: 0, right: bs.width/2)
         scrollView.frame = collectionView.frame
         scrollView.contentInset = collectionView.contentInset
@@ -237,7 +237,7 @@ private extension VideoControlView {
             generator.maximumSize = renderSize.applying(.init(scaleX: 1/multiper, y: 1/multiper))
             
             let ratio = renderSize.width/renderSize.height
-            itemWidth = ratio * itemHeight
+            itemWidth = floor(ratio * itemHeight)
         }
         // 设置item size
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)

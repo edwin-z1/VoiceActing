@@ -74,7 +74,7 @@ private extension AudioSelectionView {
             .distinctUntilChanged()
             .subscribe(onNext: { [unowned self] (indexPath) in
                 self.selectedIndexPathVariable.value = indexPath
-                self.viewModel.isRecordVariable.value = false
+                self.viewModel.endPlayAndRecord()
                 if let soundEffectItem = self.viewModel.replacingSoundEffectItem {
                     self.viewModel.updateItemSelected(soundEffectItem, isSelected: false)
                 }
@@ -107,7 +107,7 @@ private extension AudioSelectionView {
         recordView.snp.makeConstraints { (maker) in
             maker.size.equalTo(CGSize(width: 90, height: 90))
             maker.centerX.equalToSuperview()
-            maker.bottom.equalToSuperview().offset(-15)
+            maker.bottom.equalToSuperview().offset(-15.adaptHeight)
         }
         
         soundEffectView.snp.makeConstraints { (maker) in

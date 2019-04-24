@@ -78,6 +78,9 @@ class MediaComposeViewController: UIViewController {
 private extension MediaComposeViewController {
     
     func setup() {
+        
+        view.layoutIfNeeded()
+        
         setupViewModel()
         setupCloseBarButtonItem()
         setupFinishBarButtonItem()
@@ -103,10 +106,12 @@ private extension MediaComposeViewController {
         finishBarButtonItem.rx.tap
             .subscribe(onNext: { [unowned self] (_) in
                 self.showLoading()
-                self.viewModel.export(success: { [unowned self] in
+                self.viewModel.export(success: { [weak self] in
+                    guard let `self` = self else { return }
                     self.dismissLoading()
                     self.alert(title: "已保存到相册")
-                }, failure: { (error) in
+                }, failure: { [weak self] (error) in
+                    guard let `self` = self else { return }
                     self.dismissLoading()
                     self.alert(title: error.localizedDescription)
                 })
@@ -120,7 +125,7 @@ private extension MediaComposeViewController {
     
     func setupPlayerView() {
         
-        constraintPlayerViewHeight.constant = viewModel.playerViewHeightWithWidth(playerView.bs.width)
+        constraintPlayerViewHeight.constant = viewModel.playerViewHeightWithWidth(playerView.bs.width).adaptHeight
         
         viewModel.durationTextVariable.asObservable()
             .bind(to: videoDurationLabel.rx.text)
@@ -263,7 +268,7 @@ private extension MediaComposeViewController {
             maker.top.equalTo(playerView.snp.bottom)
             maker.left.equalToSuperview()
             maker.right.equalToSuperview()
-            maker.bottom.equalToSuperview()
+            maker.height.equalTo(320.adaptHeight)
         }
         
         viewModel.selectedItemVariable.asObservable()
@@ -281,7 +286,7 @@ private extension MediaComposeViewController {
 
         if isShow {
 
-            audioToolView.audioItem = viewModel.selectedItemVariable.value!
+            audioToolView.composeItem = viewModel.selectedItemVariable.value!
 
             guard audioToolView.isHidden else {
                 return
@@ -337,18 +342,20 @@ private extension MediaComposeViewController {
         if loadingView == nil {
             let loadingView = UIView(frame: view.bounds)
             loadingView.backgroundColor = UIColor.clear
-            
+
             let width: CGFloat = 70
-            let indicatorView = NVActivityIndicatorView(frame: CGRect(x: (view.bs.width - width)/2, y: (view.bs.height - width)/3, width: width, height: width), type: .ballScaleMultiple)
+            let indicatorView = NVActivityIndicatorView(frame: CGRect(x: (view.bs.width - width)/2, y: (view.bs.height - width)/2, width: width, height: width), type: .ballScaleMultiple)
             loadingView.addSubview(indicatorView)
             indicatorView.startAnimating()
             
             self.loadingView = loadingView
         }
         view.addSubview(loadingView)
+
     }
     
     func dismissLoading() {
+        
         loadingView.removeFromSuperview()
     }
     

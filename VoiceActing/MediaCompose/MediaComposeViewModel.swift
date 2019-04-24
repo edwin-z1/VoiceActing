@@ -39,7 +39,7 @@ class MediaComposeViewModel: NSObject {
     private var recordingItem: MediaComposeItem?
     private(set) var replacingSoundEffectItem: MediaComposeItem?
     
-    private var isNeedCompose = true
+    private var isNeedCompose = false
     
     private let bag = DisposeBag()
     

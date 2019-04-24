@@ -14,9 +14,10 @@ import RxCocoa
 class AudioToolView: UIView {
 
     var viewModel: MediaComposeViewModel!
-    var audioItem: MediaComposeItem! {
+    var composeItem: MediaComposeItem! {
         didSet {
-            volumeSlider.value = CGFloat(audioItem.preferredVolume)
+            deleteButton.isHidden = composeItem == viewModel.videoItem
+            volumeSlider.value = CGFloat(composeItem.preferredVolume)
         }
     }
     
@@ -50,11 +51,11 @@ private extension AudioToolView {
                 if self.loudspeakerButton.isSelected {
                     self.loudspeakerButton.setImage(#imageLiteral(resourceName: "mc_mute"), for: .normal)
                     self.volumeSlider.value = 0
-                    self.viewModel.updateItemVolume(self.audioItem, volume: 0)
+                    self.viewModel.updateItemVolume(self.composeItem, volume: 0)
                 } else {
                     self.loudspeakerButton.setImage(#imageLiteral(resourceName: "mc_speaker"), for: .normal)
                     self.volumeSlider.value = 1
-                    self.viewModel.updateItemVolume(self.audioItem, volume: 1)
+                    self.viewModel.updateItemVolume(self.composeItem, volume: 1)
                 }
             })
             .disposed(by: bag)
@@ -68,7 +69,7 @@ private extension AudioToolView {
                     img = #imageLiteral(resourceName: "mc_speaker")
                 }
                 self.loudspeakerButton.setImage(img, for: .normal)
-                self.viewModel.updateItemVolume(self.audioItem, volume: Float(value))
+                self.viewModel.updateItemVolume(self.composeItem, volume: Float(value))
             })
             .disposed(by: bag)
         
@@ -77,13 +78,14 @@ private extension AudioToolView {
                 self.alertDelete()
             })
             .disposed(by: bag)
+        
     }
     
     func alertDelete() {
         let alert = UIAlertController(title: "是否删除? ", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { [unowned self] (action) in
-            self.viewModel.removeAudioItem(self.audioItem)
+            self.viewModel.removeAudioItem(self.composeItem)
         }))
         bs.nextViewController?.present(alert, animated: true, completion: nil)
     }
