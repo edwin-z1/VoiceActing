@@ -262,11 +262,11 @@
 			children = (
 				84A48980223FAB1700A8D124 /* AppDelegate.swift */,
 				84A48982223FAB1700A8D124 /* ViewController.swift */,
+				84A48A002241F0E100A8D124 /* Protocol */,
 				84179406226EFFA300AB7104 /* Assets */,
 				84A48A102241F0E100A8D124 /* Extension */,
 				84A48A3D2242211300A8D124 /* Vendor */,
 				84A48A042241F0E100A8D124 /* PhotosSelect */,
-				84A48A002241F0E100A8D124 /* Protocol */,
 				84A489F52241E95500A8D124 /* MediaCompose */,
 				84A48984223FAB1700A8D124 /* Main.storyboard */,
 				84A48987223FAB1900A8D124 /* Assets.xcassets */,
@@ -596,6 +596,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-VoiceActing/Pods-VoiceActing-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -603,6 +604,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",

@@ -11,4 +11,7 @@ target 'VoiceActing' do
 
   #自动布局框架 SnapKit
   pod 'SnapKit', '4.0.0'
+
+  #Indicator
+  pod 'NVActivityIndicatorView'
 end

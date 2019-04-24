@@ -1,4 +1,7 @@
 PODS:
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
   - RxAtomic (4.4.2)
   - RxCocoa (4.4.2):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -7,16 +10,18 @@ PODS:
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - NVActivityIndicatorView
   - RxCocoa (~> 4.4.0)
   - RxSwift (~> 4.4.0)
   - SnapKit (= 4.0.0)
 
 SPEC CHECKSUMS:
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
   RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 38fbc97d33d7dc0ae15dceffff8ff055a358e3d0
+PODFILE CHECKSUM: dcaa55442d6ed6863b1344ac2495152325edbbb4
 
 COCOAPODS: 1.4.0

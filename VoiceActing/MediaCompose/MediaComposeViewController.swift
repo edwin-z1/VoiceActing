@@ -12,6 +12,7 @@ import AVKit
 import RxSwift
 import RxCocoa
 import SnapKit
+import NVActivityIndicatorView
 
 class MediaComposeViewController: UIViewController {
 
@@ -38,6 +39,8 @@ class MediaComposeViewController: UIViewController {
         audioToolView.isHidden = true
         return audioToolView
     }()
+    
+    private var loadingView: UIView!
     
     private let bag = DisposeBag()
     
@@ -99,10 +102,13 @@ private extension MediaComposeViewController {
     func setupFinishBarButtonItem() {
         finishBarButtonItem.rx.tap
             .subscribe(onNext: { [unowned self] (_) in
+                self.showLoading()
                 self.viewModel.export(success: { [unowned self] in
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismissLoading()
+                    self.alert(title: "已保存到相册")
                 }, failure: { (error) in
-                    print(error)
+                    self.dismissLoading()
+                    self.alert(title: error.localizedDescription)
                 })
             })
             .disposed(by: bag)
@@ -322,5 +328,33 @@ private extension MediaComposeViewController {
             maker.bottom.equalToSuperview()
             maker.height.equalTo(80)
         }
+    }
+}
+
+private extension MediaComposeViewController {
+    
+    func showLoading() {
+        if loadingView == nil {
+            let loadingView = UIView(frame: view.bounds)
+            loadingView.backgroundColor = UIColor.clear
+            
+            let width: CGFloat = 70
+            let indicatorView = NVActivityIndicatorView(frame: CGRect(x: (view.bs.width - width)/2, y: (view.bs.height - width)/3, width: width, height: width), type: .ballScaleMultiple)
+            loadingView.addSubview(indicatorView)
+            indicatorView.startAnimating()
+            
+            self.loadingView = loadingView
+        }
+        view.addSubview(loadingView)
+    }
+    
+    func dismissLoading() {
+        loadingView.removeFromSuperview()
+    }
+    
+    func alert(title: String) {
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }

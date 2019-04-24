@@ -262,7 +262,7 @@ private extension VideoControlView {
     
     func observeViewModel() {
         
-        // MARK: - play
+        // - play
         viewModel.playProgressVariable.asObservable()
             .map { [unowned self] (progress) -> String in
                 let time = self.viewModel.videoDuration * progress
@@ -283,7 +283,7 @@ private extension VideoControlView {
             .bind(to: scrollView.rx.contentOffset)
             .disposed(by: bag)
         
-        // MARK: - video item
+        // - video item
         let videoItem = viewModel.videoItem!
         editView.viewModel = viewModel
         editView.mediaItem = videoItem
@@ -316,7 +316,7 @@ private extension VideoControlView {
             })
             .disposed(by: bag)
         
-        // MARK: - audio items
+        // - audio items
         viewModel.audioItemsVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (items) in
@@ -326,6 +326,13 @@ private extension VideoControlView {
                     self.addAudioEditView()
                 } 
             })
+            .disposed(by: bag)
+        
+        // -
+        viewModel.selectedItemVariable.asObservable()
+            .skip(1)
+            .map { $0 != nil ? true : false }
+            .bind(to: timeLabel.rx.isHidden)
             .disposed(by: bag)
     }
     

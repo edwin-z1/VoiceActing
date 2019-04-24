@@ -22,8 +22,6 @@ class MediaComposeViewModel: NSObject {
     
     var collectionViewContentWidth: CGFloat = 0
     
-    private(set) var isNeedCompose: Bool = true
-    
     let isRecordVariable = Variable(false)
     let isPlayVariable = Variable(false)
     private(set) var durationTextVariable: Variable<String>!
@@ -40,6 +38,8 @@ class MediaComposeViewModel: NSObject {
     
     private var recordingItem: MediaComposeItem?
     private(set) var replacingSoundEffectItem: MediaComposeItem?
+    
+    private var isNeedCompose = true
     
     private let bag = DisposeBag()
     
