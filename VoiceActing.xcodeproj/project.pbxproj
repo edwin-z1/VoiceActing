@@ -280,8 +280,7 @@
 		84A489F52241E95500A8D124 /* MediaCompose */ = {
 			isa = PBXGroup;
 			children = (
-				8415465A224DC3EA00A89A4F /* AudioToolView.swift */,
-				8415465B224DC3EA00A89A4F /* AudioToolView.xib */,
+				84C49A212270129C0031E770 /* AudioTool */,
 				84A48A7C224223C300A8D124 /* MediaControl */,
 				84A48AC02248C71000A8D124 /* AudioSelection */,
 				84A48A3522421F3F00A8D124 /* MediaComposeItem.swift */,
@@ -455,6 +454,15 @@
 				84179433226F027A00AB7104 /* SoundEffectCollectionCell.xib */,
 			);
 			path = AudioSelection;
+			sourceTree = "<group>";
+		};
+		84C49A212270129C0031E770 /* AudioTool */ = {
+			isa = PBXGroup;
+			children = (
+				8415465A224DC3EA00A89A4F /* AudioToolView.swift */,
+				8415465B224DC3EA00A89A4F /* AudioToolView.xib */,
+			);
+			path = AudioTool;
 			sourceTree = "<group>";
 		};
 		ADDEB6E0F1743190A75280A0 /* Frameworks */ = {

@@ -1,9 +1,9 @@
 //
 //  AudioSelectionView.swift
-//  Kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/10/31.
-//  Copyright © 2018 momo. All rights reserved.
+//  Copyright © 2018 blurryssky. All rights reserved.
 //
 
 import UIKit
@@ -64,6 +64,23 @@ private extension AudioSelectionView {
         
         setupSubview()
         
+        Observable.of([AudioSelectionType.record, AudioSelectionType.soundEffect])
+            .bind(to: selectionCollectionView.rx.items(cellIdentifier: AudioSelectionCollectionCell.bs.string, cellType: AudioSelectionCollectionCell.self))  { (idx, type, cell) in
+                cell.type = type
+            }
+            .disposed(by: bag)
+        
+        selectionCollectionView.rx.itemSelected
+            .distinctUntilChanged()
+            .subscribe(onNext: { [unowned self] (indexPath) in
+                self.selectedIndexPathVariable.value = indexPath
+                self.viewModel.isRecordVariable.value = false
+                if let soundEffectItem = self.viewModel.replacingSoundEffectItem {
+                    self.viewModel.updateItemSelected(soundEffectItem, isSelected: false)
+                }
+            })
+            .disposed(by: bag)
+
         selectedIndexPathVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (idxPath) in
@@ -72,18 +89,6 @@ private extension AudioSelectionView {
             })
             .disposed(by: bag)
         
-        Observable.of([AudioSelectionType.record, AudioSelectionType.soundEffect])
-            .bind(to: selectionCollectionView.rx.items(cellIdentifier: AudioSelectionCollectionCell.bs.string, cellType: AudioSelectionCollectionCell.self))  { (idx, type, cell) in
-                cell.type = type
-            }
-            .disposed(by: bag)
-        
-        selectionCollectionView.rx.itemSelected
-            .subscribe(onNext: { [unowned self] (indexPath) in
-                self.selectedIndexPathVariable.value = indexPath
-            })
-            .disposed(by: bag)
-
         selectionCollectionView.rx.willDisplayCell
             .take(1)
             .delay(0.1, scheduler: MainScheduler.instance)
@@ -102,7 +107,7 @@ private extension AudioSelectionView {
         recordView.snp.makeConstraints { (maker) in
             maker.size.equalTo(CGSize(width: 90, height: 90))
             maker.centerX.equalToSuperview()
-            maker.bottom.equalToSuperview().offset(-5)
+            maker.bottom.equalToSuperview().offset(-15)
         }
         
         soundEffectView.snp.makeConstraints { (maker) in

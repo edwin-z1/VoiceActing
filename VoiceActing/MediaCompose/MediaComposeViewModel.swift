@@ -21,6 +21,8 @@ class MediaComposeViewModel: NSObject {
     
     var collectionViewContentWidth: CGFloat = 0
     
+    private(set) var isNeedCompose: Bool = true
+    
     let isRecordVariable = Variable(false)
     let isPlayVariable = Variable(false)
     private(set) var durationTextVariable: Variable<String>!
@@ -73,8 +75,7 @@ private extension MediaComposeViewModel {
         videoItem.editedEndTimeVariable.value = videoDuration
         videoItem.endTime = videoDuration
         videoItem.videoAsset = videoAsset
-        videoItem.isNeedCompose = false
-        
+
         videoItem.editedStartTimeVariable.asObservable()
             .skip(1)
             .subscribe(onNext: { [unowned self] (startTime) in
@@ -199,10 +200,12 @@ extension MediaComposeViewModel {
     
     func updateItemEditedStartTime(_ item: MediaComposeItem, timeInterval: TimeInterval) {
         item.editedStartTimeVariable.value = targetTimeForItem(item, timeInterval: timeInterval)
+        isNeedCompose = true
     }
     
     func updateItemEditedEndTime(_ item: MediaComposeItem, timeInterval: TimeInterval) {
         item.editedEndTimeVariable.value = targetTimeForItem(item, timeInterval: timeInterval)
+        isNeedCompose = true
     }
     
     private func targetTimeForItem(_ item: MediaComposeItem, timeInterval: TimeInterval) -> TimeInterval {
@@ -237,6 +240,8 @@ extension MediaComposeViewModel {
             audioItem.editedStartTimeVariable.value = copyAudioStartTime + timeInterval
             audioItem.editedEndTimeVariable.value = copyAudioItem.editedEndTimeVariable.value + timeInterval
         }
+        
+        isNeedCompose = true
     }
     
     func moveAudioItemsToLeft() {
@@ -257,6 +262,8 @@ extension MediaComposeViewModel {
             audioItem.editedStartTimeVariable.value = copyAudioItem.editedStartTimeVariable.value + timeInterval
             audioItem.editedEndTimeVariable.value = copyAudioEndTime + timeInterval
         }
+        
+        isNeedCompose = true
     }
     
     func copyAudioItemBeforeEditAudio() {
@@ -266,7 +273,7 @@ extension MediaComposeViewModel {
         copyAudioItem = audioItem.copy()
     }
     
-    func updateAudioItemTimes(_ item: MediaComposeItem, timeInterval: TimeInterval) {
+    func offsetAudioItemTimes(_ item: MediaComposeItem, timeInterval: TimeInterval) {
         
         let limitStartTime = videoItem.editedStartTimeVariable.value
         let limitEndTime = videoItem.editedEndTimeVariable.value
@@ -292,6 +299,13 @@ extension MediaComposeViewModel {
         item.endTime = endTime
         item.editedStartTimeVariable.value = editedStartTime
         item.editedEndTimeVariable.value = editedEndTime
+        
+        isNeedCompose = true
+    }
+    
+    func updateItemVolume(_ item: MediaComposeItem, volume: Float) {
+        item.preferredVolume = volume
+        isNeedCompose = true
     }
 }
 
@@ -320,6 +334,8 @@ extension MediaComposeViewModel {
         recordItem.fileUrl = fileUrl
         recordItem.isSelectedVariable.value = false
         recordingItem = nil
+        
+        isNeedCompose = true
     }
     
     func addSoundEffectItem(_ soundEffect: SoundEffect) {
@@ -352,6 +368,8 @@ extension MediaComposeViewModel {
         
         let editedEndTime = min(videoItem.editedEndTimeVariable.value, endTime)
         sdItem.editedEndTimeVariable.value = editedEndTime
+        
+        isNeedCompose = true
     }
     
     func removeAudioItem(_ item: MediaComposeItem) {
@@ -360,5 +378,15 @@ extension MediaComposeViewModel {
             audioItemsVariable.value.remove(at: idx)
         }
         deleteItemSubject.onNext(item)
+        
+        isNeedCompose = true
+    }
+}
+
+// MARK : - 合成
+extension MediaComposeViewModel {
+    
+    func compose() {
+        
     }
 }

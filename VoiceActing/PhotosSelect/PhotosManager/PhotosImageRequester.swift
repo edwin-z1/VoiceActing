@@ -1,9 +1,9 @@
 //
 //  PhotosGifRequester.swift
-//  Kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/12/27.
-//  Copyright © 2018 momo. All rights reserved.
+//  Copyright © 2018 blurryssky. All rights reserved.
 //
 
 import Foundation

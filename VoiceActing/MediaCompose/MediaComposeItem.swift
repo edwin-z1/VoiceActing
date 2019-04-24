@@ -1,9 +1,9 @@
 //
 //  MediaComposeItem.swift
-//  Kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/10/31.
-//  Copyright © 2018 momo. All rights reserved.
+//  Copyright © 2018 blurryssky. All rights reserved.
 //
 
 import UIKit
@@ -45,9 +45,6 @@ class MediaComposeItem: NSObject {
     // MARK: - 处理UI逻辑
     let isSelectedVariable = Variable<Bool>(false)
 
-    /// 控制是否需要合成
-    var isNeedCompose: Bool = true
-    
     deinit {
         print("\(description) deinit")
     }

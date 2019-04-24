@@ -1,9 +1,9 @@
 //
 //  AudioToolView.swift
-//  Kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/11/5.
-//  Copyright © 2018 momo. All rights reserved.
+//  Copyright © 2018 blurryssky. All rights reserved.
 //
 
 import UIKit
@@ -50,13 +50,12 @@ private extension AudioToolView {
                 if self.loudspeakerButton.isSelected {
                     self.loudspeakerButton.setImage(#imageLiteral(resourceName: "choose_music_volume_close"), for: .normal)
                     self.volumeSlider.value = 0
-                    self.audioItem.preferredVolume = 0
+                    self.viewModel.updateItemVolume(self.audioItem, volume: 0)
                 } else {
                     self.loudspeakerButton.setImage(#imageLiteral(resourceName: "choose_music_volume"), for: .normal)
                     self.volumeSlider.value = 1
-                    self.audioItem.preferredVolume = 1
+                    self.viewModel.updateItemVolume(self.audioItem, volume: 1)
                 }
-                self.audioItem.isNeedCompose = true
             })
             .disposed(by: bag)
         
@@ -69,8 +68,7 @@ private extension AudioToolView {
                     img = #imageLiteral(resourceName: "choose_music_volume")
                 }
                 self.loudspeakerButton.setImage(img, for: .normal)
-                self.audioItem.preferredVolume = Float(value)
-                self.audioItem.isNeedCompose = true
+                self.viewModel.updateItemVolume(self.audioItem, volume: Float(value))
             })
             .disposed(by: bag)
         

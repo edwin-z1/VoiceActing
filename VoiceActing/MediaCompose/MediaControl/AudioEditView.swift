@@ -1,9 +1,9 @@
 //
 //  AudioEditView.swift
-//  Kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/10/31.
-//  Copyright © 2018 momo. All rights reserved.
+//  Copyright © 2018 blurryssky. All rights reserved.
 //
 
 import UIKit
@@ -110,7 +110,7 @@ private extension AudioEditView {
                     self.viewModel.copyAudioItemBeforeEditAudio()
                 case .changed:
                     let timeInterval = self.viewModel.timeIntervalForPan(pan)
-                    self.viewModel.updateAudioItemTimes(self.audioItem, timeInterval: timeInterval)
+                    self.viewModel.offsetAudioItemTimes(self.audioItem, timeInterval: timeInterval)
                 case .cancelled:fallthrough
                 case .ended:
                     break
@@ -213,7 +213,7 @@ private extension AudioEditView {
         let endValue = audioItem.editedEndTimeVariable.value/viewModel.videoDuration
         
         let widthValue = endValue - startValue
-        if widthValue <= 0 {
+        if widthValue < 0 {
             return;
         }
         let width = CGFloat(widthValue) * viewModel.collectionViewContentWidth

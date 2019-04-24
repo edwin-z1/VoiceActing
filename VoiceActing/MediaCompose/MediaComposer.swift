@@ -1,13 +1,12 @@
 //
 //  MediaComposer.swift
-//  Kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/11/12.
-//  Copyright © 2018 momo. All rights reserved.
+//  Copyright © 2018 blurryssky. All rights reserved.
 //
 
 import Foundation
-
 import RxSwift
 
 struct MediaComposer {
@@ -17,7 +16,7 @@ struct MediaComposer {
 
         // 这个是最后的合成对象，新建的时候相当于是一张白纸，准备往上面画画
         let composition = AVMutableComposition()
-        // 这个是控制最后的composition的音量的，一般来说都会被设计成composition的属性，但iOS设计成了2个对象
+        // 这个是控制最后的composition的音量的
         let audioMix = AVMutableAudioMix()
         // 初始化该属性为一个空数组，之后可以直接往数组里添加对象
         audioMix.inputParameters = []

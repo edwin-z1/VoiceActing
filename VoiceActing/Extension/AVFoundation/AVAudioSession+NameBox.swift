@@ -1,9 +1,9 @@
 //
 //  AVAudioSession+NameBox.swift
-//  kuso
+//  VoiceActing
 //
 //  Created by blurryssky on 2018/5/1.
-//  Copyright © 2018年 momo. All rights reserved.
+//  Copyright © 2018年 blurryssky. All rights reserved.
 //
 
 import AVFoundation

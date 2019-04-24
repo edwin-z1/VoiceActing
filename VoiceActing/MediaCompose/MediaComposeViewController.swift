@@ -190,8 +190,6 @@ private extension MediaComposeViewController {
                 })
             })
             .disposed(by: bag)
-        
-        
     }
     
     func addPlayerObservation() {
