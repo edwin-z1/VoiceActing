@@ -12,7 +12,7 @@ import RxSwift
 struct MediaComposer {
     
     // 主要是把音频合在视频上，所以视频的处理会有一些不同，传参的时候把视频的model和其他音频的model分开了
-    static func compose(videoBrick: MediaComposeItem, audioBricks: [MediaComposeItem]) -> (AVMutableComposition, AVMutableAudioMix)? {
+    static func compose(videoItem: MediaComposeItem, audioItems: [MediaComposeItem]) -> (AVMutableComposition, AVMutableAudioMix)? {
 
         // 这个是最后的合成对象，新建的时候相当于是一张白纸，准备往上面画画
         let composition = AVMutableComposition()
@@ -22,7 +22,7 @@ struct MediaComposer {
         audioMix.inputParameters = []
         
         // 如果没有视频文件，return nil
-        guard let videoAsset = videoBrick.videoAsset else {
+        guard let videoAsset = videoItem.videoAsset else {
             return nil
         }
 
@@ -41,9 +41,9 @@ struct MediaComposer {
         } catch {
             return nil
         }
-        // 到此添加完毕
+        // 到此视轨添加完毕
         
-        // 添加原视频的音轨，音轨可能有多个，先检查没有音轨return nil并且记录失败
+        // 添加原视频的音轨，音轨可能有多个
         let audioTracks = videoAsset.tracks(withMediaType: .audio)
         // 所有被新建的originAudioCompositionTrack需要持有起来，之后被重合的音轨需要删除原音音轨
         var originAudioCompositionTracks: [AVMutableCompositionTrack] = []
@@ -63,7 +63,7 @@ struct MediaComposer {
         // 到此准备工作做完了，现在composition已经和原视频文件具有相同的视轨和音轨了
         
         // 开始合成录音、音乐、音效
-        for audioBrick in audioBricks {
+        for audioBrick in audioItems {
             
             var mediaAsset: AVAsset!
             switch audioBrick.type! {
@@ -119,8 +119,8 @@ struct MediaComposer {
                 inputParameter.setVolume(audioBrick.preferredVolume, at: CMTime.zero)
                 audioMix.inputParameters.append(inputParameter)
                 
-                // 如果是录音和音乐，需要把原音轨对应的声音去掉，所以去掉对应的范围
-                if audioBrick.type! != .soundEffect {
+                // 如果是录音，需要把原音轨对应的声音去掉，所以去掉对应的范围
+                if audioBrick.type! == .record {
                     // replace origin audio to empty
                     let removeRange = CMTimeRangeMake(start: startTimeByVideo, duration: audioDuration)
                     originAudioCompositionTracks.forEach {
@@ -130,7 +130,7 @@ struct MediaComposer {
                 }
             }
         }
-        // 返回的composition和audioMix，会被用在AVPlayer上进行播放
+        // 返回的composition和audioMix，会被设置在AVPlayerItem上
         return (composition, audioMix)
     }
     
@@ -159,7 +159,7 @@ struct MediaComposer {
             return nil
         }
         
-        // 这里是对竖直视频的处理，如果视频的方向不对，需要矫正（用手机竖直拍摄的视频方向就不对）
+        // 这里是对竖直视频的处理，如果视频的方向不对，需要矫正（用手机竖直拍摄的视频）
         // 下面的代码看做是固定处理代码吧
         // (其实所有视轨插入都需要这段代码，不过目前用来合成的视频方向都是正确的，而自己上传的视频都会先被裁剪，也就是调用这个方法后，再进入编辑页)
         var videoComposition: AVMutableVideoComposition?

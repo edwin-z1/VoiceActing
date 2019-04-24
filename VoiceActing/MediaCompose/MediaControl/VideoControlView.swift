@@ -106,6 +106,10 @@ private extension VideoControlView {
         isUserDidScrollObservable
             .subscribe(onNext: { [unowned self] (_) in
                 self.updateViewModelPlayProgress()
+                if let soundEffectItem = self.viewModel.replacingSoundEffectItem {
+                    self.viewModel.updateItemSelected(soundEffectItem, isSelected: false)
+                }
+                self.viewModel.isPlayVariable.value = false
             })
             .disposed(by: bag)
         

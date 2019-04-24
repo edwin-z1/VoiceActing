@@ -130,11 +130,17 @@ extension MediaComposeViewModel {
     }
     
     func handlePlayerViewTap() {
+        replacingSoundEffectItem?.isSelectedVariable.value = false
+        replacingSoundEffectItem = nil
+        
         if isRecordVariable.value {
             isRecordVariable.value = false
         } else {
             let editedEndProgress = videoItem.editedEndTimeVariable.value/videoDuration
             if editedEndProgress - playProgressVariable.value > 0.01 {
+                if isNeedCompose {
+                    compose()
+                }
                 isPlayVariable.value = !isPlayVariable.value
             }
         }
@@ -160,7 +166,7 @@ extension MediaComposeViewModel {
         }
         
         let progress = time/videoDuration
-        if progress > playProgressVariable.value {
+        if progress >= playProgressVariable.value {
             playProgressVariable.value = progress
         }
     }
@@ -387,6 +393,14 @@ extension MediaComposeViewModel {
 extension MediaComposeViewModel {
     
     func compose() {
+        guard let (composition, audioMix) = MediaComposer.compose(videoItem: videoItem, audioItems: audioItemsVariable.value) else {
+            return
+        }
+        let playerItem = AVPlayerItem(asset: composition)
+        playerItem.audioMix = audioMix
+        playerItemVariable.value = playerItem
+        updatePlayProgress(playProgressVariable.value)
         
+        isNeedCompose = false
     }
 }

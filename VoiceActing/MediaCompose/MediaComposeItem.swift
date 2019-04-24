@@ -45,10 +45,6 @@ class MediaComposeItem: NSObject {
     // MARK: - 处理UI逻辑
     let isSelectedVariable = Variable<Bool>(false)
 
-    deinit {
-        print("\(description) deinit")
-    }
-    
     /// 一个新的对象，只复制了4个时间，仅用于计算和处理UI
     func copy() -> MediaComposeItem {
         let mediaBrick = MediaComposeItem()
