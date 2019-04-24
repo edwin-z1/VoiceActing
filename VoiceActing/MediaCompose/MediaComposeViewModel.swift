@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 import RxSwift
 import RxCocoa
@@ -393,14 +394,45 @@ extension MediaComposeViewModel {
 extension MediaComposeViewModel {
     
     func compose() {
-        guard let (composition, audioMix) = MediaComposer.compose(videoItem: videoItem, audioItems: audioItemsVariable.value) else {
+        guard let (composition, audioMix, videoComposition) = MediaComposer.compose(videoItem: videoItem, audioItems: audioItemsVariable.value) else {
             return
         }
         let playerItem = AVPlayerItem(asset: composition)
         playerItem.audioMix = audioMix
+        playerItem.videoComposition = videoComposition
         playerItemVariable.value = playerItem
         updatePlayProgress(playProgressVariable.value)
         
         isNeedCompose = false
+    }
+    
+    func export(success: @escaping ()->Void, failure: @escaping (Error)->Void) {
+        
+        if isNeedCompose {
+            compose()
+        }
+        
+        let asset = playerItemVariable.value.asset
+        guard let composition = MediaComposer.clip(asset: asset, times: (videoItem.editedStartTimeVariable.value, videoItem.editedEndTimeVariable.value)) else {
+            return
+        }
+        _ = MediaComposer.exportComposedVideo(asset: composition, audioMix: playerItemVariable.value.audioMix, videoComposition: playerItemVariable.value.videoComposition)
+            .subscribe(onNext: { (fileUrl) in
+                
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetCreationRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
+                }) { (isFinished, error) in
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            failure(error)
+                        } else {
+                            success()
+                        }
+                    }
+                }
+                
+            }, onError: { (error) in
+                failure(error)
+            })
     }
 }

@@ -22,8 +22,8 @@ extension NamespaceBox where T: FileManager {
         return videosDir.appendingPathComponent("EncodedAudios")
     }
     
-    static var editedVideosDir: URL {
-        return videosDir.appendingPathComponent("EditedVideos")
+    static var composedVideosDir: URL {
+        return videosDir.appendingPathComponent("ComposedVideos")
     }
     
     // file urls
@@ -31,8 +31,8 @@ extension NamespaceBox where T: FileManager {
         return recordedAudiosDir.appendingPathComponent(timestamp).appendingPathExtension("pcm")
     }
     
-    static var newEditVideoUrl: URL {
-        return editedVideosDir.appendingPathComponent(timestamp).appendingPathExtension("mp4")
+    static var newComposeVideoUrl: URL {
+        return composedVideosDir.appendingPathComponent(timestamp).appendingPathExtension("mp4")
     }
     
     private static var timestamp: String {
@@ -44,7 +44,7 @@ extension NamespaceBox where T: FileManager {
 extension NamespaceBox where T: FileManager {
     
     static func createDirectorys() {
-        let dirs = [recordedAudiosDir, encodedAudiosDir, editedVideosDir]
+        let dirs = [recordedAudiosDir, encodedAudiosDir, composedVideosDir]
         for dir in dirs {
             if !FileManager.default.fileExists(atPath: dir.path) {
                 do {
@@ -58,7 +58,7 @@ extension NamespaceBox where T: FileManager {
     
     static func clearFiles() {
         
-        let dirs = [recordedAudiosDir, encodedAudiosDir, editedVideosDir]
+        let dirs = [recordedAudiosDir, encodedAudiosDir, composedVideosDir]
         
         for dir in dirs {
             do {

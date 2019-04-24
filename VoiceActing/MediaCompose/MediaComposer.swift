@@ -12,7 +12,7 @@ import RxSwift
 struct MediaComposer {
     
     // 主要是把音频合在视频上，所以视频的处理会有一些不同，传参的时候把视频的model和其他音频的model分开了
-    static func compose(videoItem: MediaComposeItem, audioItems: [MediaComposeItem]) -> (AVMutableComposition, AVMutableAudioMix)? {
+    static func compose(videoItem: MediaComposeItem, audioItems: [MediaComposeItem]) -> (AVMutableComposition, AVMutableAudioMix, AVMutableVideoComposition?)? {
 
         // 这个是最后的合成对象，新建的时候相当于是一张白纸，准备往上面画画
         let composition = AVMutableComposition()
@@ -42,6 +42,25 @@ struct MediaComposer {
             return nil
         }
         // 到此视轨添加完毕
+        
+        // 这里是对竖直视频的处理，如果视频的方向不对，需要矫正（用手机竖直拍摄的视频）
+        // 下面的代码看做是固定处理代码吧
+        var videoComposition: AVMutableVideoComposition?
+        if originVideoAssetTrack.preferredTransform != .identity {
+            
+            let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: originVideoCompotionTrack)
+            let transform = originVideoAssetTrack.bs.transform
+            layerInstruction.setTransform(transform, at: .zero)
+            
+            let instruction = AVMutableVideoCompositionInstruction()
+            instruction.timeRange = range
+            instruction.layerInstructions = [layerInstruction]
+            
+            videoComposition = AVMutableVideoComposition()
+            videoComposition!.renderSize = originVideoAssetTrack.bs.renderSize
+            videoComposition!.frameDuration = CMTime(value: 1, timescale: 30)
+            videoComposition!.instructions = [instruction]
+        }
         
         // 添加原视频的音轨，音轨可能有多个
         let audioTracks = videoAsset.tracks(withMediaType: .audio)
@@ -130,12 +149,12 @@ struct MediaComposer {
                 }
             }
         }
-        // 返回的composition和audioMix，会被设置在AVPlayerItem上
-        return (composition, audioMix)
+        // 返回的对象会被设置在AVPlayerItem上
+        return (composition, audioMix, videoComposition)
     }
     
-    // 视频支持裁剪功能，第一个参数其实是上面compose方法产生的composition，同时需要视频的model来获取裁剪时间
-    static func clip(asset: AVAsset, times: (startTime: TimeInterval, endTime: TimeInterval)) -> (AVMutableComposition, AVMutableVideoComposition?)? {
+    // 视频支持裁剪功能，第一个参数其实是上面compose方法产生的composition
+    static func clip(asset: AVAsset, times: (startTime: TimeInterval, endTime: TimeInterval)) -> AVMutableComposition? {
         
         // 同样是新建一个空的composition
         let composition = AVMutableComposition()
@@ -159,19 +178,16 @@ struct MediaComposer {
             return nil
         }
         
-        // 这里是对竖直视频的处理，如果视频的方向不对，需要矫正（用手机竖直拍摄的视频）
-        // 下面的代码看做是固定处理代码吧
-        // (其实所有视轨插入都需要这段代码，不过目前用来合成的视频方向都是正确的，而自己上传的视频都会先被裁剪，也就是调用这个方法后，再进入编辑页)
         var videoComposition: AVMutableVideoComposition?
         if videoAssetTrack.preferredTransform != .identity {
-        
+            
             let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoCompositionTrack)
             let transform = videoAssetTrack.bs.transform
-            // 这里的时间范围和开始时间要按照已经被裁剪后的时间来算
-            let instructionRange = CMTimeRange(start: .zero, end: CMTimeSubtract(endCMTime, startCMTime))
             layerInstruction.setTransform(transform, at: .zero)
             
             let instruction = AVMutableVideoCompositionInstruction()
+            // 这里的时间范围和开始时间要按照已经被裁剪后的时间来算
+            let instructionRange = CMTimeRange(start: .zero, end: CMTimeSubtract(endCMTime, startCMTime))
             instruction.timeRange = instructionRange
             instruction.layerInstructions = [layerInstruction]
             
@@ -192,12 +208,11 @@ struct MediaComposer {
                 continue
             }
         }
-        // 返回的composition、videoComposition会在导出的时候使用
-        return (composition, videoComposition)
+        return composition
     }
     
     // 完成视频编辑后，需要把内存里的composition audioMix videoComposition都导出到沙盒，存储起来，用来上传
-    static func exportComposedVideo(asset: AVAsset, audioMix: AVAudioMix? = nil, videoComposition: AVMutableVideoComposition? = nil) -> Observable<URL> {
+    static func exportComposedVideo(asset: AVAsset, audioMix: AVAudioMix? = nil, videoComposition: AVVideoComposition? = nil) -> Observable<URL> {
         return Observable<URL>.create({ (observer) -> Disposable in
             
             // 根据视轨的分辨率取得合适的导出分辨率
@@ -213,7 +228,7 @@ struct MediaComposer {
                 return Disposables.create()
             }
             // 根据时间戳新建一个视频文件路径
-            let outputUrl = FileManager.bs.newEditVideoUrl
+            let outputUrl = FileManager.bs.newComposeVideoUrl
             
             // 设置exportSession的参数
             exportSession.audioMix = audioMix
@@ -243,7 +258,6 @@ struct MediaComposer {
                 exportSession.cancelExport()
             }
         })
-            // 很随意的异步一下，其实意义不大
             .observeOn(MainScheduler.asyncInstance)
     }
 }

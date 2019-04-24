@@ -71,12 +71,16 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Xu4-uO-3tx">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="mc_check" id="eSK-er-snM">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="audioSelectionView" destination="6e3-Og-7br" id="P3J-fx-VcH"/>
                         <outlet property="closeBarButtonItem" destination="Xu4-uO-3tx" id="F5X-l2-2OE"/>
                         <outlet property="constraintPlayerViewHeight" destination="A25-dJ-ASt" id="Zjf-gZ-ofZ"/>
+                        <outlet property="finishBarButtonItem" destination="eSK-er-snM" id="Fl2-Et-QHK"/>
                         <outlet property="playImgView" destination="wTh-0f-t7S" id="dvq-Kf-AnH"/>
                         <outlet property="playerView" destination="Qrh-Hm-69b" id="IqX-WU-bXm"/>
                         <outlet property="videoDurationLabel" destination="Nhi-ab-QV5" id="48t-De-onD"/>
@@ -148,7 +152,7 @@
                             </cells>
                         </collectionView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="s8o-9D-RTn" secondAttribute="trailing" id="0yG-5N-tOS"/>
                         <constraint firstItem="s8o-9D-RTn" firstAttribute="top" secondItem="sAd-ew-3cB" secondAttribute="bottom" id="2uJ-ZK-TME"/>
@@ -170,5 +174,6 @@
     </scenes>
     <resources>
         <image name="ev_play" width="22" height="22"/>
+        <image name="mc_check" width="24" height="24"/>
     </resources>
 </document>

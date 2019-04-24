@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHk-O4-Bjh" customClass="HitExtendButton" customModule="VoiceActing" customModuleProvider="target">
-                    <rect key="frame" x="341" y="28" width="24" height="24"/>
+                    <rect key="frame" x="349" y="29" width="16" height="22"/>
                     <state key="normal" image="ev_trash_gray"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7v0-dk-AkH" customClass="HitExtendButton" customModule="VoiceActing" customModuleProvider="target">
@@ -26,10 +22,10 @@
                         <constraint firstAttribute="width" constant="24" id="Ylu-es-VU7"/>
                         <constraint firstAttribute="height" constant="24" id="uK9-Z7-Kmh"/>
                     </constraints>
-                    <state key="normal" image="choose_music_volume"/>
+                    <state key="normal" image="mc_speaker"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQd-eO-kJ4" customClass="AnimationSlider" customModule="VoiceActing" customModuleProvider="target">
-                    <rect key="frame" x="49" y="0.0" width="277" height="80"/>
+                    <rect key="frame" x="49" y="0.0" width="285" height="80"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -57,7 +53,7 @@
         </view>
     </objects>
     <resources>
-        <image name="choose_music_volume" width="24" height="24"/>
         <image name="ev_trash_gray" width="24" height="24"/>
+        <image name="mc_speaker" width="16" height="16"/>
     </resources>
 </document>

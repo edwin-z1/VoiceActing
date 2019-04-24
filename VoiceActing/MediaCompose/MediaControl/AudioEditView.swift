@@ -56,10 +56,6 @@ class AudioEditView: UIView {
     @IBOutlet weak var constraintDarkColorViewHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintLightColorViewHeight: NSLayoutConstraint!
     
-    deinit {
-        print("\(description) deinit")
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()

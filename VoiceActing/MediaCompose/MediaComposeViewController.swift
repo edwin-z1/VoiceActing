@@ -18,6 +18,7 @@ class MediaComposeViewController: UIViewController {
     var videoAsset: AVAsset!
     
     @IBOutlet weak var closeBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var finishBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var constraintPlayerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var playImgView: UIImageView!
@@ -76,6 +77,7 @@ private extension MediaComposeViewController {
     func setup() {
         setupViewModel()
         setupCloseBarButtonItem()
+        setupFinishBarButtonItem()
         setupPlayerView()
         setupPlayer()
         setupVideoControlView()
@@ -90,6 +92,18 @@ private extension MediaComposeViewController {
         closeBarButtonItem.rx.tap
             .subscribe(onNext: { [unowned self] (_) in
                 self.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: bag)
+    }
+    
+    func setupFinishBarButtonItem() {
+        finishBarButtonItem.rx.tap
+            .subscribe(onNext: { [unowned self] (_) in
+                self.viewModel.export(success: { [unowned self] in
+                    self.dismiss(animated: true, completion: nil)
+                }, failure: { (error) in
+                    print(error)
+                })
             })
             .disposed(by: bag)
     }
