@@ -57,6 +57,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="collectionView" destination="WaA-dI-HOe" id="tsg-8p-oyD"/>
+                <outlet property="constraintLineHeight" destination="bce-6Y-AMA" id="rjZ-7X-Elk"/>
                 <outlet property="timeLabel" destination="BXc-2G-Yvq" id="W1D-pa-kYq"/>
             </connections>
             <point key="canvasLocation" x="281.60000000000002" y="-64.767616191904054"/>

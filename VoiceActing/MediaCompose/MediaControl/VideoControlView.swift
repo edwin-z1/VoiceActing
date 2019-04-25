@@ -43,6 +43,7 @@ class VideoControlView: UIView {
         maskLayer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
         return maskLayer
     }()
+    @IBOutlet weak var constraintLineHeight: NSLayoutConstraint!
     
     private var generator: AVAssetImageGenerator!
     private var timesVariable = Variable<[NSValue]>([])
@@ -77,6 +78,8 @@ private extension VideoControlView {
     }
     
     func setup() {
+        
+        constraintLineHeight.constant = 110.adaptHeight
         
         // 需要editView始终在collection cell上方，所以使用scrollView
         addSubview(scrollView)

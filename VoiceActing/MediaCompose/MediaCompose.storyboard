@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrh-Hm-69b">
-                                <rect key="frame" x="0.0" y="12" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="6" width="375" height="200"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ev_play" translatesAutoresizingMaskIntoConstraints="NO" id="wTh-0f-t7S">
                                         <rect key="frame" x="338" y="163" width="22" height="22"/>
@@ -49,7 +49,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="A25-dJ-ASt"/>
                                     <constraint firstAttribute="bottom" secondItem="wTh-0f-t7S" secondAttribute="bottom" constant="15" id="Jug-Iu-1uJ"/>
@@ -59,11 +59,11 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="h8P-Oi-Eas" firstAttribute="trailing" secondItem="Qrh-Hm-69b" secondAttribute="trailing" id="MXa-f7-51A"/>
                             <constraint firstItem="Qrh-Hm-69b" firstAttribute="leading" secondItem="h8P-Oi-Eas" secondAttribute="leading" id="Pie-ht-fDp"/>
-                            <constraint firstItem="Qrh-Hm-69b" firstAttribute="top" secondItem="h8P-Oi-Eas" secondAttribute="top" constant="12" id="W4O-Ur-6Ex"/>
+                            <constraint firstItem="Qrh-Hm-69b" firstAttribute="top" secondItem="h8P-Oi-Eas" secondAttribute="top" constant="6" id="W4O-Ur-6Ex"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h8P-Oi-Eas"/>
                     </view>
